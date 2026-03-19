@@ -4,173 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manushart | Game Development Studio</title>
-    
     <link rel="icon" type="image/png" href="manushart-logo.png">
-
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-    
     <style>
         :root { --primary: #00d4ff; --bg: #050505; --card: #111; --text: #f0f0f0; }
-        
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: var(--bg); 
-            color: var(--text); 
-            margin: 0; 
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
-            align-items: center; 
-            justify-content: center; 
-            overflow-x: hidden; 
-        }
-        
-        .glow { 
-            position: absolute; 
-            width: 450px; 
-            height: 450px; 
-            background: var(--primary); 
-            filter: blur(160px); 
-            opacity: 0.08; 
-            z-index: -1; 
-            top: 15%; 
-            left: 50%; 
-            transform: translateX(-50%); 
-        }
-
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; min-height: 100vh; align-items: center; justify-content: center; overflow-x: hidden; }
+        .glow { position: absolute; width: 450px; height: 450px; background: var(--primary); filter: blur(160px); opacity: 0.08; z-index: -1; top: 15%; left: 50%; transform: translateX(-50%); }
         .container { text-align: center; padding: 40px; max-width: 900px; z-index: 1; animation: fadeIn 1.2s ease-out; }
-
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* LOGO DESIGN */
         .logo-container { margin-bottom: 20px; }
-        .main-logo { 
-            width: 380px; 
-            height: auto; 
-            max-width: 90vw;
-            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2)); 
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-        }
-        .main-logo:hover { transform: scale(1.05); filter: drop-shadow(0 0 35px rgba(0, 212, 255, 0.4)); }
-
-        h1 { 
-            font-family: 'Orbitron', sans-serif; 
-            font-size: 3.5rem; 
-            font-weight: 800; 
-            margin: 0; 
-            letter-spacing: 10px; 
-            text-transform: uppercase;
-            color: #ffffff;
-        }
-        
-        .brand-art { 
-            color: var(--primary); 
-            text-shadow: 0 0 25px rgba(0, 212, 255, 0.5); 
-        }
-
-        p.studio-tag { 
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem; 
-            color: #444; 
-            margin-top: 12px; 
-            letter-spacing: 6px; 
-            text-transform: uppercase;
-        }
-
-        /* INFO CARDS */
+        .main-logo { width: 380px; height: auto; max-width: 90vw; filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2)); transition: 0.4s; }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800; margin: 0; letter-spacing: 10px; text-transform: uppercase; color: #ffffff; }
+        .brand-art { color: var(--primary); text-shadow: 0 0 25px rgba(0, 212, 255, 0.5); }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 60px; }
-        .card { 
-            background: rgba(17, 17, 17, 0.8); 
-            padding: 30px; 
-            border-radius: 22px; 
-            border: 1px solid #1a1a1a; 
-            text-align: left;
-            transition: 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        .card:hover { border-color: var(--primary); background: #161616; transform: translateY(-5px); }
-        .card h3 { font-family: 'Orbitron', sans-serif; color: #fff; margin-bottom: 10px; font-size: 1.1rem; letter-spacing: 1px; }
-        .card p { color: #888; font-size: 0.95rem; line-height: 1.7; margin: 0; }
-
-        /* FEATURED PROJECT: KNIGHT LEGION */
-        .project-highlight {
-            margin-top: 40px;
-            padding: 30px;
-            border-radius: 25px;
-            background: linear-gradient(145deg, #0a1a20, #050505);
-            border: 1px solid #1a3a45;
-            text-align: center;
-            transition: 0.4s;
-        }
-        .project-highlight:hover { border-color: var(--primary); box-shadow: 0 0 40px rgba(0, 212, 255, 0.1); }
-        .project-highlight h4 { font-family: 'Orbitron', sans-serif; color: var(--primary); margin: 0; letter-spacing: 3px; font-size: 0.8rem; }
-        .project-highlight h2 { font-family: 'Orbitron', sans-serif; font-size: 1.6rem; margin: 15px 0; color: #fff; }
-        .project-highlight p { color: #666; font-size: 0.95rem; margin-bottom: 25px; }
-
-        /* BUTTONS */
+        .card { background: rgba(17, 17, 17, 0.8); padding: 30px; border-radius: 22px; border: 1px solid #1a1a1a; text-align: left; backdrop-filter: blur(10px); }
+        .project-highlight { margin-top: 40px; padding: 30px; border-radius: 25px; background: linear-gradient(145deg, #0a1a20, #050505); border: 1px solid #1a3a45; text-align: center; }
         .btn-group { margin-top: 50px; display: flex; gap: 20px; justify-content: center; }
-        .btn { 
-            font-family: 'Orbitron', sans-serif;
-            padding: 18px 40px; 
-            border-radius: 14px; 
-            text-decoration: none; 
-            font-weight: 800; 
-            font-size: 0.85rem; 
-            letter-spacing: 2px;
-            transition: 0.3s ease; 
-        }
+        .btn { font-family: 'Orbitron', sans-serif; padding: 18px 40px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; transition: 0.3s ease; display: inline-block; }
         .btn-main { background: var(--primary); color: #050505; border: 2px solid var(--primary); }
-        .btn-main:hover { background: transparent; color: var(--primary); box-shadow: 0 0 30px rgba(0, 212, 255, 0.3); transform: translateY(-3px); }
-        
+        .btn-main:hover { background: transparent; color: var(--primary); box-shadow: 0 0 30px rgba(0, 212, 255, 0.3); }
         .btn-sub { border: 2px solid #222; color: #555; }
         .btn-sub:hover { border-color: #444; color: #fff; }
-
-        .footer { 
-            margin-top: 80px; 
-            color: #222; 
-            font-size: 0.65rem; 
-            letter-spacing: 3px; 
-            font-family: 'Orbitron', sans-serif; 
-            text-transform: uppercase;
-        }
     </style>
 </head>
 <body>
     <div class="glow"></div>
-
     <div class="container">
         <div class="logo-container">
             <img src="manushart-logo.png" alt="Manushart Logo" class="main-logo">
         </div>
-        
         <h1>MANUSH<span class="brand-art">ART</span></h1>
-        <p class="studio-tag">Game Development Studio</p>
-
         <div class="grid">
-            <div class="card">
-                <h3>VIRTUAL WORLDS</h3>
-                <p>Crafting immersive gaming experiences with artistic passion and high-end technology.</p>
-            </div>
-            <div class="card">
-                <h3>SECURE SYSTEMS</h3>
-                <p>Advanced architectural solutions backed by 24 years of software expertise.</p>
-            </div>
+            <div class="card"><h3>VIRTUAL WORLDS</h3><p>Crafting immersive gaming experiences.</p></div>
+            <div class="card"><h3>SECURE SYSTEMS</h3><p>24 years of software expertise.</p></div>
         </div>
-
         <div class="project-highlight">
-            <h4>FEATURED PROJECT</h4>
-            <h2>Knight Legion: RPG Strategy</h2>
-            <p>Step into an epic world of strategy and conquest. Development is currently in progress.</p>
-            <a href="knight-legion.html" target="_blank" class="btn btn-main">VIEW PROJECT</a>
+            <h4 style="font-family: 'Orbitron'; color: var(--primary); font-size: 0.8rem; letter-spacing: 3px;">FEATURED PROJECT</h4>
+            <h2 style="font-family: 'Orbitron';">Knight Legion: RPG Strategy</h2>
+            <a href="knight-legion.html" class="btn btn-main">VIEW PROJECT</a>
         </div>
-
         <div class="btn-group">
             <a href="contact.html" class="btn btn-sub">CONTACT</a>
             <a href="privacy.html" class="btn btn-sub">PRIVACY</a>
-        </div>
-
-        <div class="footer">
-            EST. 2026 // MANUSHART WORLDWIDE // <a href="index.html" style="color: inherit; text-decoration: none;">REFRESH</a>
         </div>
     </div>
 </body>
