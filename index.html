@@ -37,7 +37,7 @@
             transform: translateX(-50%); 
         }
 
-        .container { text-align: center; padding: 40px; max-width: 850px; z-index: 1; animation: fadeIn 1.2s ease-out; }
+        .container { text-align: center; padding: 40px 20px; max-width: 850px; z-index: 1; animation: fadeIn 1.2s ease-out; box-sizing: border-box; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -63,7 +63,6 @@
             text-shadow: 0 0 25px rgba(0, 212, 255, 0.5); 
         }
 
-        /* Başlıksız Tanıtım Kartları */
         .intro-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -82,7 +81,6 @@
         }
         .intro-card p { color: #aaa; font-size: 1rem; line-height: 1.7; margin: 0; }
 
-        /* Knight Legion Section */
         .project-highlight {
             margin-top: 40px;
             padding: 30px;
@@ -119,6 +117,17 @@
         .btn-sub:hover { border-color: #444; color: #fff; }
 
         .footer { margin-top: 80px; color: #222; font-size: 0.65rem; letter-spacing: 3px; font-family: 'Orbitron', sans-serif; }
+
+        /* --- MOBILE RESPONSIVE FIXES --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; letter-spacing: 5px; }
+            .intro-grid { grid-template-columns: 1fr; } /* Kartlar alt alta gelsin */
+            .project-info { flex-direction: column; text-align: center; } /* Logo üste, yazı alta */
+            .project-title-wrapper { text-align: center; }
+            .btn-group { flex-direction: column; width: 100%; align-items: center; }
+            .btn { width: 100%; max-width: 300px; box-sizing: border-box; text-align: center; }
+            .container { padding: 60px 20px; }
+        }
     </style>
 </head>
 <body>
