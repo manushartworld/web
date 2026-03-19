@@ -23,6 +23,17 @@
             align-items: center;
         }
 
+        /* DİL SEÇİCİ */
+        .lang-switcher {
+            position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 10px;
+        }
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: #fff;
+            padding: 8px 12px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem; transition: 0.3s;
+        }
+        .lang-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(0, 212, 255, 0.1); }
+
         .container { 
             max-width: 800px; 
             width: 100%;
@@ -31,6 +42,7 @@
             border-radius: 25px;
             border: 1px solid #1a1a1a;
             box-sizing: border-box;
+            z-index: 1;
         }
 
         h1 { 
@@ -65,9 +77,8 @@
         }
         .back-link:hover { text-shadow: 0 0 10px var(--primary); transform: translateX(-5px); }
 
-        /* MOBİL AYARLAR */
         @media (max-width: 600px) {
-            body { padding: 20px 15px; }
+            body { padding: 60px 15px 20px 15px; }
             .container { padding: 25px; }
             h1 { font-size: 1.4rem; }
             h2 { font-size: 1rem; }
@@ -76,25 +87,94 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Privacy Policy</h1>
-        <p><strong>Effective Date:</strong> March 19, 2026</p>
-        
-        <p>Welcome to <strong>Manushart</strong>. We are committed to protecting your privacy. This policy applies to all applications and games published under the Manushart developer account.</p>
-
-        <h2>1. Data Collection</h2>
-        <p>Our applications generally do not collect personal identification information (PII). Any data used within our games (such as high scores or local settings) is stored locally on your device unless otherwise stated.</p>
-
-        <h2>2. Permissions</h2>
-        <p>We only request permissions that are strictly necessary for the application's functionality. We do not sell or share any user data with third parties for marketing purposes.</p>
-
-        <h2>3. Third-Party Services</h2>
-        <p>Some of our apps may use standard industry services (like Google Play Services or Apple Game Center) for cloud saves or achievements. These services have their own privacy policies.</p>
-
-        <h2>4. Contact Us</h2>
-        <p>If you have any questions regarding your privacy while using our applications, please contact us at: <strong>manushartworld@gmail.com</strong></p>
-
-        <a href="index.html" class="back-link">&larr; BACK TO HOME</a>
+    <div class="lang-switcher">
+        <button class="lang-btn" id="btn-tr" onclick="setLanguage('tr')">TR</button>
+        <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
     </div>
+
+    <div class="container">
+        <h1 id="text-h1">Privacy Policy</h1>
+        <p><strong id="text-date-label">Effective Date:</strong> <span id="text-date">March 19, 2026</span></p>
+        
+        <p id="text-welcome">Welcome to <strong>Manushart</strong>. We are committed to protecting your privacy. This policy applies to all applications and games published under the Manushart developer account.</p>
+
+        <h2 id="text-h2-1">1. Data Collection</h2>
+        <p id="text-p1">Our applications generally do not collect personal identification information (PII). Any data used within our games (such as high scores or local settings) is stored locally on your device unless otherwise stated.</p>
+
+        <h2 id="text-h2-2">2. Permissions</h2>
+        <p id="text-p2">We only request permissions that are strictly necessary for the application's functionality. We do not sell or share any user data with third parties for marketing purposes.</p>
+
+        <h2 id="text-h2-3">3. Third-Party Services</h2>
+        <p id="text-p3">Some of our apps may use standard industry services (like Google Play Services or Apple Game Center) for cloud saves or achievements. These services have their own privacy policies.</p>
+
+        <h2 id="text-h2-4">4. Contact Us</h2>
+        <p id="text-p4">If you have any questions regarding your privacy while using our applications, please contact us at: <strong>manushartworld@gmail.com</strong></p>
+
+        <a href="index.html" class="back-link" id="btn-back">&larr; BACK TO HOME</a>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                h1: "Privacy Policy",
+                dateLabel: "Effective Date:",
+                date: "March 19, 2026",
+                welcome: "Welcome to <strong>Manushart</strong>. We are committed to protecting your privacy. This policy applies to all applications and games published under the Manushart developer account.",
+                h2_1: "1. Data Collection",
+                p1: "Our applications generally do not collect personal identification information (PII). Any data used within our games (such as high scores or local settings) is stored locally on your device unless otherwise stated.",
+                h2_2: "2. Permissions",
+                p2: "We only request permissions that are strictly necessary for the application's functionality. We do not sell or share any user data with third parties for marketing purposes.",
+                h2_3: "3. Third-Party Services",
+                p3: "Some of our apps may use standard industry services (like Google Play Services or Apple Game Center) for cloud saves or achievements. These services have their own privacy policies.",
+                h2_4: "4. Contact Us",
+                p4: "If you have any questions regarding your privacy while using our applications, please contact us at: <strong>manushartworld@gmail.com</strong>",
+                back: "← BACK TO HOME"
+            },
+            tr: {
+                h1: "Gizlilik Politikası",
+                dateLabel: "Yürürlük Tarihi:",
+                date: "19 Mart 2026",
+                welcome: "<strong>Manushart</strong>'a hoş geldiniz. Gizliliğinizi korumayı taahhüt ediyoruz. Bu politika, Manushart geliştirici hesabı altında yayınlanan tüm uygulama ve oyunlar için geçerlidir.",
+                h2_1: "1. Veri Toplama",
+                p1: "Uygulamalarımız genel olarak kişisel tanımlama bilgileri (PII) toplamaz. Oyunlarımızda kullanılan veriler (yüksek skorlar veya yerel ayarlar gibi), aksi belirtilmedikçe yerel olarak cihazınızda saklanır.",
+                h2_2: "2. İzinler",
+                p2: "Yalnızca uygulamanın işlevselliği için kesinlikle gerekli olan izinleri talep ediyoruz. Kullanıcı verilerini pazarlama amacıyla üçüncü taraflarla satmıyor veya paylaşmıyoruz.",
+                h2_3: "3. Üçüncü Taraf Hizmetleri",
+                p3: "Bazı uygulamalarımız, bulut kayıtları veya başarımlar için standart endüstri hizmetlerini (Google Play Hizmetleri veya Apple Game Center gibi) kullanabilir. Bu hizmetlerin kendi gizlilik politikaları vardır.",
+                h2_4: "4. Bize Ulaşın",
+                p4: "Uygulamalarımızı kullanırken gizliliğinizle ilgili herhangi bir sorunuz olursa, lütfen bizimle iletişime geçin: <strong>manushartworld@gmail.com</strong>",
+                back: "← ANA SAYFAYA DÖN"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.getElementById('text-h1').innerText = translations[lang].h1;
+            document.getElementById('text-date-label').innerText = translations[lang].dateLabel;
+            document.getElementById('text-date').innerText = translations[lang].date;
+            document.getElementById('text-welcome').innerHTML = translations[lang].welcome;
+            document.getElementById('text-h2-1').innerText = translations[lang].h2_1;
+            document.getElementById('text-p1').innerText = translations[lang].p1;
+            document.getElementById('text-h2-2').innerText = translations[lang].h2_2;
+            document.getElementById('text-p2').innerText = translations[lang].p2;
+            document.getElementById('text-h2-3').innerText = translations[lang].h2_3;
+            document.getElementById('text-p3').innerText = translations[lang].p3;
+            document.getElementById('text-h2-4').innerHTML = translations[lang].p4;
+            document.getElementById('btn-back').innerText = translations[lang].back;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        window.onload = function() {
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang) {
+                setLanguage(savedLang);
+            } else {
+                setLanguage('en');
+            }
+        };
+    </script>
 </body>
 </html>
