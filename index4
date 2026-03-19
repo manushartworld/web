@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manushart | Mobile Game Studio</title>
+    
+    <link rel="icon" type="image/png" href="manushart-logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --primary: #00d4ff; --bg: #050505; --card: #111; --text: #f0f0f0; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+            align-items: center; 
+            justify-content: center; 
+            overflow-x: hidden; 
+        }
+        
+        .glow { 
+            position: absolute; 
+            width: 450px; 
+            height: 450px; 
+            background: var(--primary); 
+            filter: blur(160px); 
+            opacity: 0.08; 
+            z-index: -1; 
+            top: 15%; 
+            left: 50%; 
+            transform: translateX(-50%); 
+        }
+
+        .container { text-align: center; padding: 40px 20px; max-width: 850px; z-index: 1; animation: fadeIn 1.2s ease-out; box-sizing: border-box; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .logo-container { margin-bottom: 25px; }
+        .main-logo { 
+            width: 380px; 
+            height: auto; 
+            max-width: 90vw;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2)); 
+        }
+
+        h1 { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 3.5rem; 
+            font-weight: 800; 
+            margin: 0; 
+            letter-spacing: 10px; 
+            text-transform: uppercase;
+        }
+        
+        .brand-art { 
+            color: var(--primary); 
+            text-shadow: 0 0 25px rgba(0, 212, 255, 0.5); 
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .intro-card {
+            background: rgba(17, 17, 17, 0.7);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid #1a1a1a;
+            backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        .intro-card p { color: #aaa; font-size: 1rem; line-height: 1.7; margin: 0; }
+
+        .project-highlight {
+            margin-top: 40px;
+            padding: 30px;
+            border-radius: 25px;
+            background: linear-gradient(145deg, #0a1a20, #050505);
+            border: 1px solid #1a3a45;
+        }
+        .project-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .mini-game-logo { width: 65px; height: 65px; object-fit: contain; border-radius: 14px; }
+        .project-title-wrapper { text-align: left; }
+        .project-title-wrapper h4 { font-family: 'Orbitron'; color: var(--primary); margin: 0; font-size: 0.75rem; letter-spacing: 2px; }
+        .project-title-wrapper h2 { font-family: 'Orbitron'; font-size: 1.4rem; margin: 5px 0 0 0; color: #fff; }
+
+        .btn-group { margin-top: 50px; display: flex; gap: 20px; justify-content: center; }
+        .btn { 
+            font-family: 'Orbitron', sans-serif;
+            padding: 16px 40px; 
+            border-radius: 14px; 
+            text-decoration: none; 
+            font-weight: 800; 
+            font-size: 0.8rem; 
+            letter-spacing: 2px;
+            transition: 0.3s ease; 
+        }
+        .btn-main { background: var(--primary); color: #050505; border: 2px solid var(--primary); }
+        .btn-main:hover { background: transparent; color: var(--primary); transform: translateY(-3px); }
+        .btn-sub { border: 2px solid #222; color: #555; }
+        .btn-sub:hover { border-color: #444; color: #fff; }
+
+        .footer { margin-top: 80px; color: #222; font-size: 0.65rem; letter-spacing: 3px; font-family: 'Orbitron', sans-serif; }
+
+        /* --- MOBILE RESPONSIVE FIXES --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; letter-spacing: 5px; }
+            .intro-grid { grid-template-columns: 1fr; } /* Kartlar alt alta gelsin */
+            .project-info { flex-direction: column; text-align: center; } /* Logo üste, yazı alta */
+            .project-title-wrapper { text-align: center; }
+            .btn-group { flex-direction: column; width: 100%; align-items: center; }
+            .btn { width: 100%; max-width: 300px; box-sizing: border-box; text-align: center; }
+            .container { padding: 60px 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow"></div>
+
+    <div class="container">
+        <div class="logo-container">
+            <img src="manushart-logo.png" alt="Manushart Logo" class="main-logo">
+        </div>
+        
+        <h1>MANUSH<span class="brand-art">ART</span></h1>
+
+        <div class="intro-grid">
+            <div class="intro-card">
+                <p>Built on extensive industry expertise and a meticulous work ethic, focused on high-quality digital experiences and innovative design.</p>
+            </div>
+            <div class="intro-card">
+                <p>Specializing in the iOS and Android ecosystem, bringing premium applications and immersive games to global mobile markets.</p>
+            </div>
+        </div>
+
+        <div class="project-highlight">
+            <div class="project-info">
+                <img src="knightlegion.png" alt="Knight Legion" class="mini-game-logo">
+                <div class="project-title-wrapper">
+                    <h4>NOW IN DEVELOPMENT</h4>
+                    <h2>Knight Legion: RPG Strategy</h2>
+                </div>
+            </div>
+            <a href="knight-legion.html" class="btn btn-main">VIEW PROJECT</a>
+        </div>
+
+        <div class="btn-group">
+            <a href="contact.html" class="btn btn-sub">CONTACT</a>
+            <a href="privacy.html" class="btn btn-sub">PRIVACY</a>
+        </div>
+
+        <div class="footer">
+            EST. 2026 // MANUSHART WORLDWIDE
+        </div>
+    </div>
+</body>
+</html>
