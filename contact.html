@@ -6,51 +6,159 @@
     <title>Contact | Manushart Studio</title>
     
     <link rel="icon" type="image/png" href="manushart-logo.png">
-
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
         :root { --primary: #00d4ff; --bg: #050505; --card: #111; --text: #f0f0f0; --input-bg: #1a1a1a; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; min-height: 100vh; align-items: center; justify-content: center; overflow-x: hidden; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); 
+            margin: 0; display: flex; flex-direction: column; min-height: 100vh; 
+            align-items: center; justify-content: center; overflow-x: hidden; 
+        }
+
+        /* DİL SEÇİCİ */
+        .lang-switcher {
+            position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 10px;
+        }
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: #fff;
+            padding: 8px 12px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem; transition: 0.3s;
+        }
+        .lang-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(0, 212, 255, 0.1); }
+
         .glow { position: absolute; width: 400px; height: 400px; background: var(--primary); filter: blur(150px); opacity: 0.05; z-index: -1; }
-        .container { text-align: center; padding: 40px; width: 100%; max-width: 500px; z-index: 1; }
-        h1 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 800; margin-bottom: 30px; letter-spacing: 5px; color: #ffffff; text-transform: uppercase; }
-        .contact-form { background: var(--card); padding: 40px; border-radius: 25px; border: 1px solid #222; text-align: left; backdrop-filter: blur(10px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .container { text-align: center; padding: 40px; width: 100%; max-width: 500px; z-index: 1; box-sizing: border-box; }
+        
+        h1 { 
+            font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 800; 
+            margin-bottom: 30px; letter-spacing: 5px; color: #ffffff; text-transform: uppercase; 
+        }
+
+        .contact-form { 
+            background: var(--card); padding: 40px; border-radius: 25px; border: 1px solid #222; 
+            text-align: left; backdrop-filter: blur(10px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+        }
         .form-group { margin-bottom: 20px; }
         label { display: block; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; color: var(--primary); margin-bottom: 8px; letter-spacing: 1px; }
-        input, textarea { width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid #333; border-radius: 12px; color: #fff; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; transition: 0.3s; }
+        
+        input, textarea { 
+            width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid #333; 
+            border-radius: 12px; color: #fff; font-family: 'Inter', sans-serif; font-size: 0.9rem; 
+            box-sizing: border-box; transition: 0.3s; 
+        }
         input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 212, 255, 0.1); }
         textarea { height: 120px; resize: none; }
-        .submit-btn { width: 100%; padding: 18px; background: var(--primary); color: #000; border: none; border-radius: 12px; font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+
+        .submit-btn { 
+            width: 100%; padding: 18px; background: var(--primary); color: #000; border: none; 
+            border-radius: 12px; font-family: 'Orbitron', sans-serif; font-weight: 800; 
+            font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: 0.3s; margin-top: 10px; 
+        }
         .submit-btn:hover { box-shadow: 0 0 30px rgba(0, 212, 255, 0.4); transform: translateY(-2px); }
-        .back-btn { margin-top: 40px; font-family: 'Orbitron', sans-serif; display: inline-block; color: #444; text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; transition: 0.3s; }
+
+        .back-btn { 
+            margin-top: 40px; font-family: 'Orbitron', sans-serif; display: inline-block; 
+            color: #444; text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; transition: 0.3s; 
+        }
         .back-btn:hover { color: var(--primary); }
+        
         .footer { margin-top: 60px; color: #222; font-size: 0.6rem; letter-spacing: 3px; font-family: 'Orbitron', sans-serif; }
+
+        @media (max-width: 600px) {
+            .container { padding: 20px; }
+            .contact-form { padding: 25px; }
+            h1 { font-size: 1.6rem; }
+        }
     </style>
 </head>
 <body>
+    <div class="lang-switcher">
+        <button class="lang-btn" id="btn-tr" onclick="setLanguage('tr')">TR</button>
+        <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+    </div>
+
     <div class="glow"></div>
     <div class="container">
-        <h1>GET IN TOUCH</h1>
+        <h1 id="text-h1">GET IN TOUCH</h1>
         
         <form class="contact-form" action="https://formspree.io/f/xpqyblvp" method="POST">
             <div class="form-group">
-                <label>FULL NAME</label>
-                <input type="text" name="name" placeholder="Enter your name" required>
+                <label id="label-name">FULL NAME</label>
+                <input type="text" name="name" id="input-name" placeholder="Enter your name" required>
             </div>
             <div class="form-group">
-                <label>EMAIL ADDRESS</label>
-                <input type="email" name="_replyto" placeholder="Enter your email" required>
+                <label id="label-email">EMAIL ADDRESS</label>
+                <input type="email" name="_replyto" id="input-email" placeholder="Enter your email" required>
             </div>
             <div class="form-group">
-                <label>MESSAGE</label>
-                <textarea name="message" placeholder="How can we help you?" required></textarea>
+                <label id="label-message">MESSAGE</label>
+                <textarea name="message" id="input-message" placeholder="How can we help you?" required></textarea>
             </div>
-            <button type="submit" class="submit-btn">SEND MESSAGE</button>
+            <button type="submit" class="submit-btn" id="btn-submit">SEND MESSAGE</button>
         </form>
 
-        <a href="index.html" class="back-btn">← BACK TO HOME</a>
-        <div class="footer">MANUSHART WORLDWIDE // 2026</div>
+        <a href="index.html" class="back-btn" id="btn-back">← BACK TO HOME</a>
+        <div class="footer" id="text-footer">MANUSHART WORLDWIDE // 2026</div>
     </div>
+
+    <script>
+        const translations = {
+            en: {
+                h1: "GET IN TOUCH",
+                labelName: "FULL NAME",
+                labelEmail: "EMAIL ADDRESS",
+                labelMessage: "MESSAGE",
+                placeholderName: "Enter your name",
+                placeholderEmail: "Enter your email",
+                placeholderMessage: "How can we help you?",
+                btnSubmit: "SEND MESSAGE",
+                btnBack: "← BACK TO HOME",
+                footer: "MANUSHART WORLDWIDE // 2026"
+            },
+            tr: {
+                h1: "İLETİŞİME GEÇ",
+                labelName: "AD SOYAD",
+                labelEmail: "E-POSTA ADRESİ",
+                labelMessage: "MESAJINIZ",
+                placeholderName: "Adınızı girin",
+                placeholderEmail: "E-postanızı girin",
+                placeholderMessage: "Size nasıl yardımcı olabiliriz?",
+                btnSubmit: "MESAJI GÖNDER",
+                btnBack: "← ANA SAYFAYA DÖN",
+                footer: "MANUSHART DÜNYA ÇAPINDA // 2026"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.getElementById('text-h1').innerText = translations[lang].h1;
+            document.getElementById('label-name').innerText = translations[lang].labelName;
+            document.getElementById('label-email').innerText = translations[lang].labelEmail;
+            document.getElementById('label-message').innerText = translations[lang].labelMessage;
+            
+            document.getElementById('input-name').placeholder = translations[lang].placeholderName;
+            document.getElementById('input-email').placeholder = translations[lang].placeholderEmail;
+            document.getElementById('input-message').placeholder = translations[lang].placeholderMessage;
+            
+            document.getElementById('btn-submit').innerText = translations[lang].btnSubmit;
+            document.getElementById('btn-back').innerText = translations[lang].btnBack;
+            document.getElementById('text-footer').innerText = translations[lang].footer;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        window.onload = function() {
+            const savedLang = localStorage.getItem('preferredLang');
+            if (savedLang) {
+                setLanguage(savedLang);
+            } else {
+                setLanguage('en'); 
+            }
+        };
+    </script>
 </body>
 </html>
