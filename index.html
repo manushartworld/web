@@ -6,7 +6,6 @@
     <title>Manushart | Game Development Studio</title>
     
     <link rel="icon" type="image/png" href="manushart-logo.png">
-
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     
     <style>
@@ -25,7 +24,6 @@
             overflow-x: hidden; 
         }
         
-        /* Arkaplan Derinlik Efekti */
         .glow { 
             position: absolute; 
             width: 450px; 
@@ -43,20 +41,20 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* LOGO TASARIMI */
+        /* LOGO TASARIMI - DİKDÖRTGEN DÜZELTME */
         .logo-container { margin-bottom: 20px; }
         .main-logo { 
-            width: 180px; 
-            height: auto; 
+            width: 380px; /* Genişliği artırdım ki dikdörtgen logo rahatlasın */
+            height: auto; /* Boyu otomatik ayarlansın, basık durmasın */
+            max-width: 90vw; /* Mobilde ekrandan taşmasın */
             filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2)); 
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
         }
-        .main-logo:hover { transform: scale(1.08); filter: drop-shadow(0 0 35px rgba(0, 212, 255, 0.4)); }
+        .main-logo:hover { transform: scale(1.05); filter: drop-shadow(0 0 35px rgba(0, 212, 255, 0.4)); }
 
-        /* MANUSHART BAŞLIK */
         h1 { 
             font-family: 'Orbitron', sans-serif; 
-            font-size: 3.8rem; 
+            font-size: 3.5rem; 
             font-weight: 800; 
             margin: 0; 
             letter-spacing: 10px; 
@@ -71,14 +69,13 @@
 
         p.studio-tag { 
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.85rem; 
+            font-size: 0.8rem; 
             color: #444; 
             margin-top: 12px; 
             letter-spacing: 6px; 
             text-transform: uppercase;
         }
 
-        /* KARTLAR */
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 60px; }
         .card { 
             background: rgba(17, 17, 17, 0.8); 
@@ -93,7 +90,6 @@
         .card h3 { font-family: 'Orbitron', sans-serif; color: #fff; margin-bottom: 15px; font-size: 1.1rem; letter-spacing: 1px; }
         .card p { color: #888; font-size: 0.95rem; line-height: 1.7; margin: 0; }
 
-        /* BUTONLAR */
         .btn-group { margin-top: 70px; display: flex; gap: 25px; justify-content: center; }
         .btn { 
             font-family: 'Orbitron', sans-serif;
