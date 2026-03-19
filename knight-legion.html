@@ -21,61 +21,63 @@
             overflow-x: hidden;
         }
 
+        /* DİL SEÇİCİ STİLİ (Ana sayfayla aynı) */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
         .glow { 
-            position: absolute; 
-            width: 450px; 
-            height: 450px; 
-            background: #0a2d3a; 
-            filter: blur(150px); 
-            opacity: 0.1; 
-            z-index: -1; 
-            top: 20%; 
-            left: 50%; 
-            transform: translateX(-50%); 
+            position: absolute; width: 450px; height: 450px; background: #0a2d3a; 
+            filter: blur(150px); opacity: 0.1; z-index: -1; top: 20%; left: 50%; transform: translateX(-50%); 
         }
 
         .container { max-width: 1200px; margin: 0 auto; }
 
         .game-logo { 
-            width: 320px; 
-            max-width: 80%; 
-            margin-bottom: 25px; 
-            filter: drop-shadow(0 0 15px rgba(0,212,255,0.25)); 
-            transition: 0.3s ease;
+            width: 320px; max-width: 80%; margin-bottom: 25px; 
+            filter: drop-shadow(0 0 15px rgba(0,212,255,0.25)); transition: 0.3s ease;
         }
         
         h1 { 
-            font-family: 'Orbitron', sans-serif; 
-            font-size: 3rem; 
-            letter-spacing: 5px; 
-            color: #fff; 
-            margin-bottom: 10px; 
-            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif; font-size: 3rem; letter-spacing: 5px; 
+            color: #fff; margin-bottom: 10px; text-transform: uppercase;
         }
         
         .tagline { 
-            color: var(--primary); 
-            font-family: 'Orbitron', sans-serif; 
-            font-size: 1rem; 
-            letter-spacing: 6px; 
-            margin-bottom: 60px; 
-            text-transform: uppercase;
-            font-weight: 500;
+            color: var(--primary); font-family: 'Orbitron', sans-serif; font-size: 1rem; 
+            letter-spacing: 6px; margin-bottom: 60px; text-transform: uppercase; font-weight: 500;
         }
 
         .video-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 30px; 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; 
         }
 
         .video-card { 
-            background: var(--card); 
-            border-radius: 18px; 
-            overflow: hidden; 
-            border: 1px solid #1a1a1a; 
-            transition: 0.3s ease;
-            backdrop-filter: blur(5px);
+            background: var(--card); border-radius: 18px; overflow: hidden; border: 1px solid #1a1a1a; 
+            transition: 0.3s ease; backdrop-filter: blur(5px);
         }
 
         .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
@@ -83,48 +85,40 @@
 
         .back-link-container { margin-top: 80px; }
         .back-btn { 
-            font-family: 'Orbitron', sans-serif;
-            padding: 18px 45px; 
-            border-radius: 14px; 
-            text-decoration: none; 
-            font-weight: 800; 
-            font-size: 0.85rem; 
-            letter-spacing: 2px;
-            transition: 0.3s ease; 
-            border: 2px solid #222; 
-            color: #555;
-            display: inline-block;
+            font-family: 'Orbitron', sans-serif; padding: 18px 45px; border-radius: 14px; 
+            text-decoration: none; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px;
+            transition: 0.3s ease; border: 2px solid #222; color: #555; display: inline-block;
         }
         .back-btn:hover { border-color: #444; color: #fff; }
 
         .footer { 
-            margin-top: 100px; 
-            color: #222; 
-            font-size: 0.7rem; 
-            letter-spacing: 3px; 
-            font-family: 'Orbitron', sans-serif; 
-            text-transform: uppercase;
+            margin-top: 100px; color: #222; font-size: 0.7rem; letter-spacing: 3px; 
+            font-family: 'Orbitron', sans-serif; text-transform: uppercase;
         }
 
-        /* --- MOBILE ADJUSTMENTS --- */
         @media (max-width: 768px) {
             body { padding: 40px 15px; }
             h1 { font-size: 1.8rem; letter-spacing: 3px; }
             .tagline { font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 40px; }
-            .video-grid { grid-template-columns: 1fr; } /* Videolar alt alta */
+            .video-grid { grid-template-columns: 1fr; }
             .back-btn { padding: 15px 30px; width: 80%; font-size: 0.75rem; }
             .footer { font-size: 0.55rem; letter-spacing: 1px; }
         }
     </style>
 </head>
 <body>
+    <div class="lang-switcher">
+        <button class="lang-btn" id="btn-tr" onclick="setLanguage('tr')">TR</button>
+        <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+    </div>
+
     <div class="glow"></div>
 
     <div class="container">
         <img src="knightlegion.png" alt="Knight Legion Logo" class="game-logo">
         
-        <h1>KNIGHT LEGION</h1>
-        <p class="tagline">RPG STRATEGY // TRAILERS & SNEAK PEEKS</p>
+        <h1 id="text-title">KNIGHT LEGION</h1>
+        <p class="tagline" id="text-tagline">RPG STRATEGY // TRAILERS & SNEAK PEEKS</p>
 
         <div class="video-grid">
             <div class="video-card">
@@ -145,12 +139,57 @@
         </div>
 
         <div class="back-link-container">
-            <a href="index.html" class="back-btn">← BACK TO STUDIO HOME</a>
+            <a href="index.html" class="back-btn" id="text-back">← BACK TO STUDIO HOME</a>
         </div>
 
-        <div class="footer">
+        <div class="footer" id="text-footer">
             © 2026 MANUSHART // KNIGHT LEGION PROJECT // EST. Netherlands
         </div>
     </div>
+
+    <script>
+        const translations = {
+            en: {
+                title: "KNIGHT LEGION",
+                tagline: "RPG STRATEGY // TRAILERS & SNEAK PEEKS",
+                back: "← BACK TO STUDIO HOME",
+                footer: "© 2026 MANUSHART // KNIGHT LEGION PROJECT // EST. NETHERLANDS"
+            },
+            tr: {
+                title: "KNIGHT LEGION",
+                tagline: "RPG STRATEJE // FRAGMANLAR VE ÖNİZLEMELER",
+                back: "← STÜDYO ANA SAYFASINA DÖN",
+                footer: "© 2026 MANUSHART // KNIGHT LEGION PROJESİ // HOLLANDA"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.getElementById('text-title').innerText = translations[lang].title;
+            document.getElementById('text-tagline').innerText = translations[lang].tagline;
+            document.getElementById('text-back').innerText = translations[lang].back;
+            document.getElementById('text-footer').innerText = translations[lang].footer;
+
+            // Butonları güncelle
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            // Seçimi kaydet (Hafızada tut)
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        window.onload = function() {
+            // Önce hafızadaki dile bak
+            const savedLang = localStorage.getItem('preferredLang');
+            
+            if (savedLang) {
+                setLanguage(savedLang);
+            } else {
+                // Hafıza boşsa (ilk kez giriyorsa) tarayıcı diline veya IP'ye bakılabilir
+                // Şimdilik ana sayfada yaptığımız gibi IP kontrolü de eklenebilir ama 
+                // ana sayfadan gelen biri zaten dili seçmiş olacaktır.
+                setLanguage('en'); 
+            }
+        };
+    </script>
 </body>
 </html>
