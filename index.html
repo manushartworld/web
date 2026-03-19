@@ -23,18 +23,38 @@
             justify-content: center; 
             overflow-x: hidden; 
         }
+
+        /* DİL SEÇİCİ STİLİ */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            transition: 0.3s;
+        }
+
+        .lang-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(0, 212, 255, 0.1);
+        }
         
         .glow { 
-            position: absolute; 
-            width: 450px; 
-            height: 450px; 
-            background: var(--primary); 
-            filter: blur(160px); 
-            opacity: 0.08; 
-            z-index: -1; 
-            top: 15%; 
-            left: 50%; 
-            transform: translateX(-50%); 
+            position: absolute; width: 450px; height: 450px; background: var(--primary); 
+            filter: blur(160px); opacity: 0.08; z-index: -1; top: 15%; left: 50%; transform: translateX(-50%); 
         }
 
         .container { text-align: center; padding: 40px 20px; max-width: 850px; z-index: 1; animation: fadeIn 1.2s ease-out; box-sizing: border-box; }
@@ -42,95 +62,45 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .logo-container { margin-bottom: 25px; }
-        .main-logo { 
-            width: 380px; 
-            height: auto; 
-            max-width: 90vw;
-            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2)); 
-        }
+        .main-logo { width: 380px; height: auto; max-width: 90vw; filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2)); }
 
-        h1 { 
-            font-family: 'Orbitron', sans-serif; 
-            font-size: 3.5rem; 
-            font-weight: 800; 
-            margin: 0; 
-            letter-spacing: 10px; 
-            text-transform: uppercase;
-        }
-        
-        .brand-art { 
-            color: var(--primary); 
-            text-shadow: 0 0 25px rgba(0, 212, 255, 0.5); 
-        }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 3.5rem; font-weight: 800; margin: 0; letter-spacing: 10px; text-transform: uppercase; }
+        .brand-art { color: var(--primary); text-shadow: 0 0 25px rgba(0, 212, 255, 0.5); }
 
-        .intro-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 50px;
-            text-align: left;
-        }
-
-        .intro-card {
-            background: rgba(17, 17, 17, 0.7);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid #1a1a1a;
-            backdrop-filter: blur(10px);
-            transition: 0.3s;
-        }
+        .intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 50px; text-align: left; }
+        .intro-card { background: rgba(17, 17, 17, 0.7); padding: 30px; border-radius: 20px; border: 1px solid #1a1a1a; backdrop-filter: blur(10px); }
         .intro-card p { color: #aaa; font-size: 1rem; line-height: 1.7; margin: 0; }
 
-        .project-highlight {
-            margin-top: 40px;
-            padding: 30px;
-            border-radius: 25px;
-            background: linear-gradient(145deg, #0a1a20, #050505);
-            border: 1px solid #1a3a45;
-        }
-        .project-info {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
+        .project-highlight { margin-top: 40px; padding: 30px; border-radius: 25px; background: linear-gradient(145deg, #0a1a20, #050505); border: 1px solid #1a3a45; }
+        .project-info { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 25px; }
         .mini-game-logo { width: 65px; height: 65px; object-fit: contain; border-radius: 14px; }
         .project-title-wrapper { text-align: left; }
         .project-title-wrapper h4 { font-family: 'Orbitron'; color: var(--primary); margin: 0; font-size: 0.75rem; letter-spacing: 2px; }
         .project-title-wrapper h2 { font-family: 'Orbitron'; font-size: 1.4rem; margin: 5px 0 0 0; color: #fff; }
 
         .btn-group { margin-top: 50px; display: flex; gap: 20px; justify-content: center; }
-        .btn { 
-            font-family: 'Orbitron', sans-serif;
-            padding: 16px 40px; 
-            border-radius: 14px; 
-            text-decoration: none; 
-            font-weight: 800; 
-            font-size: 0.8rem; 
-            letter-spacing: 2px;
-            transition: 0.3s ease; 
-        }
+        .btn { font-family: 'Orbitron', sans-serif; padding: 16px 40px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 0.8rem; letter-spacing: 2px; transition: 0.3s ease; }
         .btn-main { background: var(--primary); color: #050505; border: 2px solid var(--primary); }
-        .btn-main:hover { background: transparent; color: var(--primary); transform: translateY(-3px); }
         .btn-sub { border: 2px solid #222; color: #555; }
-        .btn-sub:hover { border-color: #444; color: #fff; }
 
         .footer { margin-top: 80px; color: #222; font-size: 0.65rem; letter-spacing: 3px; font-family: 'Orbitron', sans-serif; }
 
-        /* --- MOBILE RESPONSIVE FIXES --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.2rem; letter-spacing: 5px; }
-            .intro-grid { grid-template-columns: 1fr; } /* Kartlar alt alta gelsin */
-            .project-info { flex-direction: column; text-align: center; } /* Logo üste, yazı alta */
+            .intro-grid { grid-template-columns: 1fr; }
+            .project-info { flex-direction: column; text-align: center; }
             .project-title-wrapper { text-align: center; }
             .btn-group { flex-direction: column; width: 100%; align-items: center; }
             .btn { width: 100%; max-width: 300px; box-sizing: border-box; text-align: center; }
-            .container { padding: 60px 20px; }
         }
     </style>
 </head>
 <body>
+    <div class="lang-switcher">
+        <button class="lang-btn" id="btn-tr" onclick="setLanguage('tr')">TR</button>
+        <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+    </div>
+
     <div class="glow"></div>
 
     <div class="container">
@@ -142,10 +112,10 @@
 
         <div class="intro-grid">
             <div class="intro-card">
-                <p>Built on extensive industry expertise and a meticulous work ethic, focused on high-quality digital experiences and innovative design.</p>
+                <p id="text-intro1">Built on extensive industry expertise and a meticulous work ethic, focused on high-quality digital experiences and innovative design.</p>
             </div>
             <div class="intro-card">
-                <p>Specializing in the iOS and Android ecosystem, bringing premium applications and immersive games to global mobile markets.</p>
+                <p id="text-intro2">Specializing in the iOS and Android ecosystem, bringing premium applications and immersive games to global mobile markets.</p>
             </div>
         </div>
 
@@ -153,21 +123,90 @@
             <div class="project-info">
                 <img src="knightlegion.png" alt="Knight Legion" class="mini-game-logo">
                 <div class="project-title-wrapper">
-                    <h4>NOW IN DEVELOPMENT</h4>
-                    <h2>Knight Legion: RPG Strategy</h2>
+                    <h4 id="text-status">NOW IN DEVELOPMENT</h4>
+                    <h2 id="text-game-title">Knight Legion: RPG Strategy</h2>
                 </div>
             </div>
-            <a href="knight-legion.html" class="btn btn-main">VIEW PROJECT</a>
+            <a href="knight-legion.html" class="btn btn-main" id="text-view-project">VIEW PROJECT</a>
         </div>
 
         <div class="btn-group">
-            <a href="contact.html" class="btn btn-sub">CONTACT</a>
-            <a href="privacy.html" class="btn btn-sub">PRIVACY</a>
+            <a href="contact.html" class="btn btn-sub" id="text-contact">CONTACT</a>
+            <a href="privacy.html" class="btn btn-sub" id="text-privacy">PRIVACY</a>
         </div>
 
-        <div class="footer">
+        <div class="footer" id="text-footer">
             EST. 2026 // MANUSHART WORLDWIDE
         </div>
     </div>
+
+    <script>
+        const translations = {
+            en: {
+                intro1: "Built on extensive industry expertise and a meticulous work ethic, focused on high-quality digital experiences and innovative design.",
+                intro2: "Specializing in the iOS and Android ecosystem, bringing premium applications and immersive games to global mobile markets.",
+                status: "NOW IN DEVELOPMENT",
+                gameTitle: "Knight Legion: RPG Strategy",
+                viewProject: "VIEW PROJECT",
+                contact: "CONTACT",
+                privacy: "PRIVACY",
+                footer: "EST. 2026 // MANUSHART WORLDWIDE"
+            },
+            tr: {
+                intro1: "Geniş sektör deneyimi ve titiz çalışma etiği üzerine kurulu, yüksek kaliteli dijital deneyimlere ve yenilikçi tasarıma odaklıyız.",
+                intro2: "iOS ve Android ekosisteminde uzmanlaşarak, küresel mobil pazarlara premium uygulamalar ve sürükleyici oyunlar sunuyoruz.",
+                status: "GELİŞTİRME AŞAMASINDA",
+                gameTitle: "Knight Legion: RPG Strateji",
+                viewProject: "PROJEYİ İNCELE",
+                contact: "İLETİŞİM",
+                privacy: "GİZLİLİK",
+                footer: "EST. 2026 // MANUSHART DÜNYA ÇAPINDA"
+            }
+        };
+
+        function setLanguage(lang) {
+            // Dil verilerini yerleştir
+            document.getElementById('text-intro1').innerText = translations[lang].intro1;
+            document.getElementById('text-intro2').innerText = translations[lang].intro2;
+            document.getElementById('text-status').innerText = translations[lang].status;
+            document.getElementById('text-game-title').innerText = translations[lang].gameTitle;
+            document.getElementById('text-view-project').innerText = translations[lang].viewProject;
+            document.getElementById('text-contact').innerText = translations[lang].contact;
+            document.getElementById('text-privacy').innerText = translations[lang].privacy;
+            document.getElementById('text-footer').innerText = translations[lang].footer;
+
+            // Buton aktiflik durumunu güncelle
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+
+            // Tercihi kaydet
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        // --- ANA MANTIK BAŞLANGICI ---
+        window.onload = function() {
+            const savedLang = localStorage.getItem('preferredLang');
+
+            if (savedLang) {
+                // Daha önce seçim yaptıysa onu kullan
+                setLanguage(savedLang);
+            } else {
+                // Hiç seçim yapmamış, ülkeden kontrol et
+                fetch('https://ipapi.co/json/')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.country_code === 'TR') {
+                            setLanguage('tr');
+                        } else {
+                            setLanguage('en');
+                        }
+                    })
+                    .catch(() => {
+                        // API hata verirse varsayılan olarak İngilizce aç
+                        setLanguage('en');
+                    });
+            }
+        };
+    </script>
 </body>
 </html>
