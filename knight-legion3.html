@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knight Legion: RPG Strategy | Manushart</title>
+    
+    <link rel="icon" type="image/png" href="manushart-logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { --primary: #00d4ff; --bg: #0a0a0a; --card: #111; --text: #f0f0f0; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            padding: 60px 20px; 
+            text-align: center; 
+            overflow-x: hidden;
+        }
+
+        .glow { 
+            position: absolute; 
+            width: 450px; 
+            height: 450px; 
+            background: #0a2d3a; 
+            filter: blur(150px); 
+            opacity: 0.1; 
+            z-index: -1; 
+            top: 20%; 
+            left: 50%; 
+            transform: translateX(-50%); 
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .game-logo { 
+            width: 320px; 
+            max-width: 80%; 
+            margin-bottom: 25px; 
+            filter: drop-shadow(0 0 15px rgba(0,212,255,0.25)); 
+            transition: 0.3s ease;
+        }
+        
+        h1 { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 3rem; 
+            letter-spacing: 5px; 
+            color: #fff; 
+            margin-bottom: 10px; 
+            text-transform: uppercase;
+        }
+        
+        .tagline { 
+            color: var(--primary); 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 1rem; 
+            letter-spacing: 6px; 
+            margin-bottom: 60px; 
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .video-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+        }
+
+        .video-card { 
+            background: var(--card); 
+            border-radius: 18px; 
+            overflow: hidden; 
+            border: 1px solid #1a1a1a; 
+            transition: 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        .back-link-container { margin-top: 80px; }
+        .back-btn { 
+            font-family: 'Orbitron', sans-serif;
+            padding: 18px 45px; 
+            border-radius: 14px; 
+            text-decoration: none; 
+            font-weight: 800; 
+            font-size: 0.85rem; 
+            letter-spacing: 2px;
+            transition: 0.3s ease; 
+            border: 2px solid #222; 
+            color: #555;
+            display: inline-block;
+        }
+        .back-btn:hover { border-color: #444; color: #fff; }
+
+        .footer { 
+            margin-top: 100px; 
+            color: #222; 
+            font-size: 0.7rem; 
+            letter-spacing: 3px; 
+            font-family: 'Orbitron', sans-serif; 
+            text-transform: uppercase;
+        }
+
+        /* --- MOBILE ADJUSTMENTS --- */
+        @media (max-width: 768px) {
+            body { padding: 40px 15px; }
+            h1 { font-size: 1.8rem; letter-spacing: 3px; }
+            .tagline { font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 40px; }
+            .video-grid { grid-template-columns: 1fr; } /* Videolar alt alta */
+            .back-btn { padding: 15px 30px; width: 80%; font-size: 0.75rem; }
+            .footer { font-size: 0.55rem; letter-spacing: 1px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="glow"></div>
+
+    <div class="container">
+        <img src="knightlegion.png" alt="Knight Legion Logo" class="game-logo">
+        
+        <h1>KNIGHT LEGION</h1>
+        <p class="tagline">RPG STRATEGY // TRAILERS & SNEAK PEEKS</p>
+
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/uJHVWmzmvfc" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/zVDLN0mUTgU" allowfullscreen></iframe>
+                </div>
+            </div>
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/MFA7NudSKks" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-link-container">
+            <a href="index.html" class="back-btn">← BACK TO STUDIO HOME</a>
+        </div>
+
+        <div class="footer">
+            © 2026 MANUSHART // KNIGHT LEGION PROJECT // EST. Netherlands
+        </div>
+    </div>
+</body>
+</html>
