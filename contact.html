@@ -3,68 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Manushart | Studio Support</title>
+    <title>Contact | Manushart Studio</title>
+    
+    <link rel="icon" type="image/png" href="manushart-logo.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --primary: #00d4ff; --bg: #0a0a0a; --panel: #161616; --text: #e0e0e0; --input-bg: #1f1f1f; }
-        body { font-family: 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); color: var(--text); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        :root { --primary: #00d4ff; --bg: #050505; --card: #111; --text: #f0f0f0; }
         
-        .contact-panel { max-width: 500px; width: 100%; padding: 40px; background: var(--panel); border-radius: 20px; border: 1px solid #222; box-shadow: 0 20px 50px rgba(0,0,0,0.8); animation: slideIn 0.6s ease-out; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+            align-items: center; 
+            justify-content: center; 
+            overflow-x: hidden; 
+        }
         
-        @keyframes slideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .glow { 
+            position: absolute; 
+            width: 400px; 
+            height: 400px; 
+            background: var(--primary); 
+            filter: blur(150px); 
+            opacity: 0.05; 
+            z-index: -1; 
+        }
 
-        h1 { color: var(--primary); text-transform: uppercase; letter-spacing: 3px; text-align: center; margin-bottom: 10px; font-size: 2rem; }
-        p.subtitle { text-align: center; color: #888; margin-bottom: 40px; font-size: 0.95rem; }
+        .container { text-align: center; padding: 40px; max-width: 600px; z-index: 1; }
 
-        form { text-align: left; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; color: #aaa; font-size: 0.9rem; font-weight: 600; }
-        
-        input, textarea { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid #333; background-color: var(--input-bg); color: #fff; box-sizing: border-box; font-size: 1rem; transition: all 0.3s ease; }
-        input:focus, textarea:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 15px rgba(0, 212, 255, 0.15); background-color: #252525; }
-        
-        textarea { resize: none; }
+        h1 { 
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            margin-bottom: 30px; 
+            letter-spacing: 5px; 
+            color: #ffffff;
+            text-transform: uppercase;
+        }
 
-        /* Premium Shimmer Button */
-        button { width: 100%; padding: 18px; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; color: #0a0a0a; background: linear-gradient(120deg, #0099bb, var(--primary), #00d4ff); background-size: 200% 100%; border: none; border-radius: 10px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; animation: shimmer 4s infinite linear; }
-        button:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4); }
-        button:active { transform: translateY(-1px); }
-        
-        @keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
+        .contact-card {
+            background: var(--card);
+            padding: 40px;
+            border-radius: 25px;
+            border: 1px solid #1a1a1a;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
 
-        .back-home { text-align: center; margin-top: 35px; }
-        .back-home a { color: #555; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
-        .back-home a:hover { color: var(--primary); }
+        .contact-info { margin-bottom: 30px; }
+        .contact-info p { color: #888; margin: 10px 0; font-size: 1rem; }
+        .contact-email { 
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary); 
+            font-size: 1.2rem; 
+            text-decoration: none;
+            margin-top: 15px;
+            letter-spacing: 1px;
+        }
+        .contact-email:hover { text-shadow: 0 0 15px rgba(0, 212, 255, 0.5); }
+
+        .back-btn { 
+            margin-top: 50px;
+            font-family: 'Orbitron', sans-serif;
+            display: inline-block;
+            color: #444;
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .back-btn:hover { color: var(--primary); }
+
+        .footer { margin-top: 60px; color: #222; font-size: 0.65rem; letter-spacing: 3px; font-family: 'Orbitron', sans-serif; }
     </style>
 </head>
 <body>
+    <div class="glow"></div>
 
-    <div class="contact-panel">
-        <h1>Contact Us</h1>
-        <p class="subtitle">Have a question? We'll get back to you as soon as possible.</p>
+    <div class="container">
+        <h1>GET IN TOUCH</h1>
 
-        <form action="https://formspree.io/f/xpqyblvp" method="POST">
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" name="name" placeholder="Enter your name" required>
+        <div class="contact-card">
+            <div class="contact-info">
+                <p>For business inquiries, collaborations, or support:</p>
+                <a href="mailto:info@manushart.com" class="contact-email">info@manushart.com</a>
             </div>
+            <p style="font-size: 0.8rem; color: #444;">Based in Netherlands // Global Operations</p>
+        </div>
 
-            <div class="form-group">
-                <label>Email Address</label>
-                <input type="email" name="email" placeholder="your@email.com" required>
-            </div>
+        <a href="index.html" class="back-btn">← BACK TO HOME</a>
 
-            <div class="form-group">
-                <label>Your Message</label>
-                <textarea name="message" rows="5" placeholder="How can we help?" required></textarea>
-            </div>
-
-            <button type="submit">Send Message</button>
-        </form>
-
-        <div class="back-home">
-            <a href="index.html">&larr; Return to Manushart Home</a>
+        <div class="footer">
+            MANUSHART WORLDWIDE // 2026
         </div>
     </div>
-
 </body>
 </html>
