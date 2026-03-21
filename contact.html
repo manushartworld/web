@@ -6,7 +6,9 @@
     <title>Contact | Manushart Studio</title>
     <link rel="icon" type="image/png" href="manushart-logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcxXJIsAAAAAGvadY0O2uqMQCfxo6B66Z_GgXG1"></script>
+    
     <style>
         :root { --primary: #00d4ff; --bg: #050505; --card: #111; --text: #f0f0f0; --input-bg: #1a1a1a; }
         body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; min-height: 100vh; align-items: center; justify-content: center; overflow-x: hidden; }
@@ -26,11 +28,11 @@
         .submit-btn:hover { box-shadow: 0 0 30px rgba(0, 212, 255, 0.4); transform: translateY(-2px); }
         .submit-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
         #form-status { margin-top: 20px; font-family: 'Orbitron', sans-serif; font-size: 0.8rem; text-align: center; font-weight: 800; display: none; }
-        /* Captcha için küçük bir boşluk */
-        .g-recaptcha { margin-bottom: 20px; display: flex; justify-content: center; }
         .back-btn { margin-top: 40px; font-family: 'Orbitron', sans-serif; display: inline-block; color: #444; text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; transition: 0.3s; }
         .back-btn:hover { color: var(--primary); }
         .footer { margin-top: 60px; color: #222; font-size: 0.6rem; letter-spacing: 3px; font-family: 'Orbitron', sans-serif; }
+        /* v3 logosu için yer açar veya gizler */
+        .grecaptcha-badge { visibility: visible; }
     </style>
 </head>
 <body>
@@ -56,8 +58,6 @@
                 <textarea name="message" id="input-message" placeholder="How can we help you?" required></textarea>
             </div>
 
-            <div class="g-recaptcha" data-sitekey="6LdmWpIsAAAAADUVuBDXq-H82aOSjLf1v99miOFG"></div>
-
             <button type="submit" class="submit-btn" id="btn-submit">SEND MESSAGE</button>
             <div id="form-status"></div>
         </form>
@@ -67,8 +67,8 @@
 
     <script>
         const translations = {
-            en: { h1: "GET IN TOUCH", labelName: "FULL NAME", labelEmail: "EMAIL ADDRESS", labelMessage: "MESSAGE", placeholderName: "Enter your name", placeholderEmail: "Enter your email", placeholderMessage: "How can we help you?", btnSubmit: "SEND MESSAGE", btnBack: "← BACK TO HOME", footer: "EST. 2026 / MANUSHART", sending: "SENDING...", success: "MESSAGE SENT!", error: "ERROR! TRY AGAIN.", captcha: "PLEASE VERIFY CAPTCHA!" },
-            tr: { h1: "İLETİŞİME GEÇ", labelName: "AD SOYAD", labelEmail: "E-POSTA ADRESİ", labelMessage: "MESAJINIZ", placeholderName: "Adınızı girin", placeholderEmail: "E-postanızı girin", placeholderMessage: "Size nasıl yardımcı olabiliriz?", btnSubmit: "MESAJI GÖNDER", btnBack: "← ANA SAYFAYA DÖN", footer: "EST. 2026 / MANUSHART", sending: "GÖNDERİLİYOR...", success: "MESAJ GÖNDERİLDİ!", error: "HATA! TEKRAR DENEYİN.", captcha: "LÜTFEN DOĞRULAMAYI YAPIN!" }
+            en: { h1: "GET IN TOUCH", labelName: "FULL NAME", labelEmail: "EMAIL ADDRESS", labelMessage: "MESSAGE", placeholderName: "Enter your name", placeholderEmail: "Enter your email", placeholderMessage: "How can we help you?", btnSubmit: "SEND MESSAGE", btnBack: "← BACK TO HOME", footer: "EST. 2026 / MANUSHART", sending: "SENDING...", success: "MESSAGE SENT!", error: "ERROR! TRY AGAIN." },
+            tr: { h1: "İLETİŞİME GEÇ", labelName: "AD SOYAD", labelEmail: "E-POSTA ADRESİ", labelMessage: "MESAJINIZ", placeholderName: "Adınızı girin", placeholderEmail: "E-postanızı girin", placeholderMessage: "Size nasıl yardımcı olabiliriz?", btnSubmit: "MESAJI GÖNDER", btnBack: "← ANA SAYFAYA DÖN", footer: "EST. 2026 / MANUSHART", sending: "GÖNDERİLİYOR...", success: "MESAJ GÖNDERİLDİ!", error: "HATA! TEKRAR DENEYİN." }
         };
 
         function setLanguage(lang) {
@@ -87,59 +87,51 @@
             localStorage.setItem('preferredLang', lang);
         }
 
-        // --- GÖNDERME MANTIĞI (AJAX) ---
         document.getElementById('contactForm').onsubmit = function(e) {
             e.preventDefault();
             const lang = localStorage.getItem('preferredLang') || 'en';
             const status = document.getElementById('form-status');
             const btn = document.getElementById('btn-submit');
             
-            // 3. CAPTCHA KONTROLÜ
-            const captchaResponse = grecaptcha.getResponse();
-            if (!captchaResponse) {
-                status.style.display = "block";
-                status.style.color = "#ff4444";
-                status.innerText = translations[lang].captcha;
-                return;
-            }
-
-            const scriptUrl = "https://script.google.com/macros/s/AKfycbxM2CKWDPMjG7f0ACaQKHtKmRs2yeHUwlGK_CURG83dyC9DQJhRrSFtj65AkzTr4riK/exec"; 
-
             status.style.display = "block";
             status.style.color = "var(--primary)";
             status.innerText = translations[lang].sending;
             btn.disabled = true;
 
-            const name = encodeURIComponent(document.getElementById('input-name').value);
-            const email = encodeURIComponent(document.getElementById('input-email').value);
-            const message = encodeURIComponent(document.getElementById('input-message').value);
-            const zuno = encodeURIComponent(document.getElementsByName('zuno')[0].value);
-            
-            // URL'ye captcha cevabını ekliyoruz
-            const fullUrl = `${scriptUrl}?name=${name}&email=${email}&message=${message}&zuno=${zuno}&g-recaptcha-response=${encodeURIComponent(captchaResponse)}`;
+            // v3 Token Alımı
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LcxXJIsAAAAAGvadY0O2uqMQCfxo6B66Z_GgXG1', {action: 'submit'}).then(function(token) {
+                    
+                    const scriptUrl = "https://script.google.com/macros/s/AKfycbxM2CKWDPMjG7f0ACaQKHtKmRs2yeHUwlGK_CURG83dyC9DQJhRrSFtj65AkzTr4riK/exec"; 
 
-            const request = new XMLHttpRequest();
-            request.open("GET", fullUrl, true);
-            
-            request.onreadystatechange = function() {
-    if (request.readyState === 4) {
-        //responseText içinde "SUCCESS" kelimesi geçiyor mu diye bakıyoruz
-        if (request.responseText.includes("SUCCESS")) { 
-            status.style.color = "#00ff88";
-            status.innerText = translations[lang].success;
-            document.getElementById('contactForm').reset();
-            grecaptcha.reset();
-        } else {
-            // Eğer SUCCESS değilse, gelen hatayı console'a yaz ve ekranda ERROR göster
-            console.log("Google Script Hatası: " + request.responseText);
-            status.style.color = "#ff4444";
-            status.innerText = translations[lang].error;
-        }
-        btn.disabled = false;
-        setTimeout(() => { status.style.display = "none"; }, 5000);
-    }
-};
-            request.send();
+                    const name = encodeURIComponent(document.getElementById('input-name').value);
+                    const email = encodeURIComponent(document.getElementById('input-email').value);
+                    const message = encodeURIComponent(document.getElementById('input-message').value);
+                    const zuno = encodeURIComponent(document.getElementsByName('zuno')[0].value);
+                    
+                    const fullUrl = `${scriptUrl}?name=${name}&email=${email}&message=${message}&zuno=${zuno}&g-recaptcha-response=${encodeURIComponent(token)}`;
+
+                    const request = new XMLHttpRequest();
+                    request.open("GET", fullUrl, true);
+                    
+                    request.onreadystatechange = function() {
+                        if (request.readyState === 4) {
+                            if (request.responseText.includes("SUCCESS")) { 
+                                status.style.color = "#00ff88";
+                                status.innerText = translations[lang].success;
+                                document.getElementById('contactForm').reset();
+                            } else {
+                                console.log("Hata Detayı: " + request.responseText);
+                                status.style.color = "#ff4444";
+                                status.innerText = translations[lang].error;
+                            }
+                            btn.disabled = false;
+                            setTimeout(() => { status.style.display = "none"; }, 5000);
+                        }
+                    };
+                    request.send();
+                });
+            });
         };
 
         window.onload = () => setLanguage(localStorage.getItem('preferredLang') || 'en');
