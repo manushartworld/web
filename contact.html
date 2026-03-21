@@ -122,21 +122,23 @@
             request.open("GET", fullUrl, true);
             
             request.onreadystatechange = function() {
-                if (request.readyState === 4) {
-                    // Google Apps Script no-cors'da bazen status 0 döner ama 200 en sağlıklısıdır
-                    if (request.status === 200 || request.status === 0) {
-                        status.style.color = "#00ff88";
-                        status.innerText = translations[lang].success;
-                        document.getElementById('contactForm').reset();
-                        grecaptcha.reset(); // Kutucuğu sıfırla
-                    } else {
-                        status.style.color = "#ff4444";
-                        status.innerText = translations[lang].error;
-                    }
-                    btn.disabled = false;
-                    setTimeout(() => { status.style.display = "none"; }, 5000);
-                }
-            };
+    if (request.readyState === 4) {
+        //responseText içinde "SUCCESS" kelimesi geçiyor mu diye bakıyoruz
+        if (request.responseText.includes("SUCCESS")) { 
+            status.style.color = "#00ff88";
+            status.innerText = translations[lang].success;
+            document.getElementById('contactForm').reset();
+            grecaptcha.reset();
+        } else {
+            // Eğer SUCCESS değilse, gelen hatayı console'a yaz ve ekranda ERROR göster
+            console.log("Google Script Hatası: " + request.responseText);
+            status.style.color = "#ff4444";
+            status.innerText = translations[lang].error;
+        }
+        btn.disabled = false;
+        setTimeout(() => { status.style.display = "none"; }, 5000);
+    }
+};
             request.send();
         };
 
