@@ -83,33 +83,46 @@
 
         // --- GÖNDERME MANTIĞI (AJAX) ---
         document.getElementById('contactForm').onsubmit = function(e) {
-            e.preventDefault();
-            const lang = localStorage.getItem('preferredLang') || 'en';
-            const status = document.getElementById('form-status');
-            const btn = document.getElementById('btn-submit');
-            const scriptUrl = "https://script.google.com/macros/s/AKfycbxM2CKWDPMjG7f0ACaQKHtKmRs2yeHUwlGK_CURG83dyC9DQJhRrSFtj65AkzTr4riK/exec"; // <--- URL'Yİ BURAYA YAPIŞTIR!
+    e.preventDefault();
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    const status = document.getElementById('form-status');
+    const btn = document.getElementById('btn-submit');
+    
+    // URL'yi buraya düzgünce yapıştır (Sonu /exec ile biten)
+    const scriptUrl = "https://script.google.com/macros/s/AKfycbxM2CKWDPMjG7f0ACaQKHtKmRs2yeHUwlGK_CURG83dyC9DQJhRrSFtj65AkzTr4riK/exec"; 
 
-            status.style.display = "block";
-            status.style.color = "var(--primary)";
-            status.innerText = translations[lang].sending;
-            btn.disabled = true;
+    status.style.display = "block";
+    status.innerText = translations[lang].sending;
+    btn.disabled = true;
 
-            const formData = new FormData(this);
-            fetch(scriptUrl, { method: 'POST', body: formData, mode: 'no-cors' })
-            .then(() => {
+    // Verileri URL parametresine çeviriyoruz (En garantisi bu)
+    const name = encodeURIComponent(document.getElementById('input-name').value);
+    const email = encodeURIComponent(document.getElementById('input-email').value);
+    const message = encodeURIComponent(document.getElementById('input-message').value);
+    const zuno = encodeURIComponent(document.getElementsByName('zuno')[0].value);
+
+    const fullUrl = `${scriptUrl}?name=${name}&email=${email}&message=${message}&zuno=${zuno}`;
+
+    // Yeni yöntem: Script etiketi oluşturup göndermek (CORS'u %100 deler)
+    const request = new XMLHttpRequest();
+    request.open("GET", fullUrl, true);
+    
+    request.onreadystatechange = function() {
+        if (request.readyState === 4) {
+            if (request.status === 200 && request.responseText.includes("SUCCESS")) {
                 status.style.color = "#00ff88";
                 status.innerText = translations[lang].success;
-                this.reset();
-            })
-            .catch(() => {
+                document.getElementById('contactForm').reset();
+            } else {
                 status.style.color = "#ff4444";
                 status.innerText = translations[lang].error;
-            })
-            .finally(() => {
-                btn.disabled = false;
-                setTimeout(() => { status.style.display = "none"; }, 5000);
-            });
-        };
+            }
+            btn.disabled = false;
+            setTimeout(() => { status.style.display = "none"; }, 5000);
+        }
+    };
+    request.send();
+};
 
         window.onload = () => setLanguage(localStorage.getItem('preferredLang') || 'en');
     </script>
