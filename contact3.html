@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | Manushart Studio</title>
+    <link rel="icon" type="image/png" href="manushart-logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        :root { --primary: #00d4ff; --bg: #050505; --card: #111; --text: #f0f0f0; --input-bg: #1a1a1a; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; min-height: 100vh; align-items: center; justify-content: center; overflow-x: hidden; }
+        .lang-switcher { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 10px; }
+        .lang-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; transition: 0.3s; }
+        .lang-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(0, 212, 255, 0.1); }
+        .glow { position: absolute; width: 400px; height: 400px; background: var(--primary); filter: blur(150px); opacity: 0.05; z-index: -1; }
+        .container { text-align: center; padding: 40px; width: 100%; max-width: 500px; z-index: 1; box-sizing: border-box; }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 800; margin-bottom: 30px; letter-spacing: 5px; color: #ffffff; text-transform: uppercase; }
+        .contact-form { background: var(--card); padding: 40px; border-radius: 25px; border: 1px solid #222; text-align: left; backdrop-filter: blur(10px); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; color: var(--primary); margin-bottom: 8px; letter-spacing: 1px; }
+        input, textarea { width: 100%; padding: 15px; background: var(--input-bg); border: 1px solid #333; border-radius: 12px; color: #fff; font-family: 'Inter', sans-serif; font-size: 0.9rem; box-sizing: border-box; transition: 0.3s; }
+        input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 212, 255, 0.1); }
+        textarea { height: 120px; resize: none; }
+        .submit-btn { width: 100%; padding: 18px; background: var(--primary); color: #000; border: none; border-radius: 12px; font-family: 'Orbitron', sans-serif; font-weight: 800; font-size: 0.9rem; letter-spacing: 2px; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .submit-btn:hover { box-shadow: 0 0 30px rgba(0, 212, 255, 0.4); transform: translateY(-2px); }
+        .submit-btn:disabled { background: #333; color: #666; cursor: not-allowed; }
+        #form-status { margin-top: 20px; font-family: 'Orbitron', sans-serif; font-size: 0.8rem; text-align: center; font-weight: 800; display: none; }
+        /* Captcha için küçük bir boşluk */
+        .g-recaptcha { margin-bottom: 20px; display: flex; justify-content: center; }
+        .back-btn { margin-top: 40px; font-family: 'Orbitron', sans-serif; display: inline-block; color: #444; text-decoration: none; font-size: 0.75rem; letter-spacing: 2px; transition: 0.3s; }
+        .back-btn:hover { color: var(--primary); }
+        .footer { margin-top: 60px; color: #222; font-size: 0.6rem; letter-spacing: 3px; font-family: 'Orbitron', sans-serif; }
+    </style>
+</head>
+<body>
+    <div class="lang-switcher">
+        <button class="lang-btn" id="btn-tr" onclick="setLanguage('tr')">TR</button>
+        <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+    </div>
+    <div class="glow"></div>
+    <div class="container">
+        <h1 id="text-h1">GET IN TOUCH</h1>
+        <form class="contact-form" id="contactForm">
+            <div style="display:none;"><input type="text" name="zuno" value=""></div>
+            <div class="form-group">
+                <label id="label-name">FULL NAME</label>
+                <input type="text" name="name" id="input-name" placeholder="Enter your name" required>
+            </div>
+            <div class="form-group">
+                <label id="label-email">EMAIL ADDRESS</label>
+                <input type="email" name="email" id="input-email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label id="label-message">MESSAGE</label>
+                <textarea name="message" id="input-message" placeholder="How can we help you?" required></textarea>
+            </div>
+
+            <div class="g-recaptcha" data-sitekey="6LdmWpIsAAAAADUVuBDXq-H82aOSjLf1v99miOFG"></div>
+
+            <button type="submit" class="submit-btn" id="btn-submit">SEND MESSAGE</button>
+            <div id="form-status"></div>
+        </form>
+        <a href="index.html" class="back-btn" id="btn-back">← BACK TO HOME</a>
+        <div class="footer" id="text-footer">MANUSHART WORLDWIDE // 2026</div>
+    </div>
+
+    <script>
+        const translations = {
+            en: { h1: "GET IN TOUCH", labelName: "FULL NAME", labelEmail: "EMAIL ADDRESS", labelMessage: "MESSAGE", placeholderName: "Enter your name", placeholderEmail: "Enter your email", placeholderMessage: "How can we help you?", btnSubmit: "SEND MESSAGE", btnBack: "← BACK TO HOME", footer: "EST. 2026 / MANUSHART", sending: "SENDING...", success: "MESSAGE SENT!", error: "ERROR! TRY AGAIN.", captcha: "PLEASE VERIFY CAPTCHA!" },
+            tr: { h1: "İLETİŞİME GEÇ", labelName: "AD SOYAD", labelEmail: "E-POSTA ADRESİ", labelMessage: "MESAJINIZ", placeholderName: "Adınızı girin", placeholderEmail: "E-postanızı girin", placeholderMessage: "Size nasıl yardımcı olabiliriz?", btnSubmit: "MESAJI GÖNDER", btnBack: "← ANA SAYFAYA DÖN", footer: "EST. 2026 / MANUSHART", sending: "GÖNDERİLİYOR...", success: "MESAJ GÖNDERİLDİ!", error: "HATA! TEKRAR DENEYİN.", captcha: "LÜTFEN DOĞRULAMAYI YAPIN!" }
+        };
+
+        function setLanguage(lang) {
+            document.getElementById('text-h1').innerText = translations[lang].h1;
+            document.getElementById('label-name').innerText = translations[lang].labelName;
+            document.getElementById('label-email').innerText = translations[lang].labelEmail;
+            document.getElementById('label-message').innerText = translations[lang].labelMessage;
+            document.getElementById('input-name').placeholder = translations[lang].placeholderName;
+            document.getElementById('input-email').placeholder = translations[lang].placeholderEmail;
+            document.getElementById('input-message').placeholder = translations[lang].placeholderMessage;
+            document.getElementById('btn-submit').innerText = translations[lang].btnSubmit;
+            document.getElementById('btn-back').innerText = translations[lang].btnBack;
+            document.getElementById('text-footer').innerText = translations[lang].footer;
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        // --- GÖNDERME MANTIĞI (AJAX) ---
+        document.getElementById('contactForm').onsubmit = function(e) {
+            e.preventDefault();
+            const lang = localStorage.getItem('preferredLang') || 'en';
+            const status = document.getElementById('form-status');
+            const btn = document.getElementById('btn-submit');
+            
+            // 3. CAPTCHA KONTROLÜ
+            const captchaResponse = grecaptcha.getResponse();
+            if (!captchaResponse) {
+                status.style.display = "block";
+                status.style.color = "#ff4444";
+                status.innerText = translations[lang].captcha;
+                return;
+            }
+
+            const scriptUrl = "https://script.google.com/macros/s/AKfycbxM2CKWDPMjG7f0ACaQKHtKmRs2yeHUwlGK_CURG83dyC9DQJhRrSFtj65AkzTr4riK/exec"; 
+
+            status.style.display = "block";
+            status.style.color = "var(--primary)";
+            status.innerText = translations[lang].sending;
+            btn.disabled = true;
+
+            const name = encodeURIComponent(document.getElementById('input-name').value);
+            const email = encodeURIComponent(document.getElementById('input-email').value);
+            const message = encodeURIComponent(document.getElementById('input-message').value);
+            const zuno = encodeURIComponent(document.getElementsByName('zuno')[0].value);
+            
+            // URL'ye captcha cevabını ekliyoruz
+            const fullUrl = `${scriptUrl}?name=${name}&email=${email}&message=${message}&zuno=${zuno}&g-recaptcha-response=${encodeURIComponent(captchaResponse)}`;
+
+            const request = new XMLHttpRequest();
+            request.open("GET", fullUrl, true);
+            
+            request.onreadystatechange = function() {
+    if (request.readyState === 4) {
+        //responseText içinde "SUCCESS" kelimesi geçiyor mu diye bakıyoruz
+        if (request.responseText.includes("SUCCESS")) { 
+            status.style.color = "#00ff88";
+            status.innerText = translations[lang].success;
+            document.getElementById('contactForm').reset();
+            grecaptcha.reset();
+        } else {
+            // Eğer SUCCESS değilse, gelen hatayı console'a yaz ve ekranda ERROR göster
+            console.log("Google Script Hatası: " + request.responseText);
+            status.style.color = "#ff4444";
+            status.innerText = translations[lang].error;
+        }
+        btn.disabled = false;
+        setTimeout(() => { status.style.display = "none"; }, 5000);
+    }
+};
+            request.send();
+        };
+
+        window.onload = () => setLanguage(localStorage.getItem('preferredLang') || 'en');
+    </script>
+</body>
+</html>
