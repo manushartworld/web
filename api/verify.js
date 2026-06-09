@@ -5,7 +5,8 @@ export default async function handler(req, res) {
   if (!orderid) return res.status(400).json({ error: "orderid gerekli" });
 
   try {
-    const url = `https://partner.steamgames.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=4686310&orderid=${orderid}`;
+    // Kodundaki URL kısmını bununla değiştir
+    const url = `https://api.steampowered.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=4686310&orderid=${orderid}`;
     
     const response = await fetch(url);
     
