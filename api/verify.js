@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const url = `https://api.steampowered.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${time}`;
+    const url = `https://partner.steam-api.com/ISteamMicroTxnSandbox/GetReport/v0002/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${time}`;
     
     const response = await fetch(url);
     const data = await response.text();
