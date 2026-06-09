@@ -4,7 +4,7 @@ export default async function handler(req, res) {
 
   try {
     const time = Math.floor(Date.now() / 1000);
-    const url = `https://partner.steamgames.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=4686310&orderid=${orderid}&time=${time}`;
+    const url = `https://api.steampowered.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=4686310&orderid=${orderid}&time=${time}`;
     
     const response = await fetch(url);
     const text = await response.text(); // Steam'den gelen her şeyi metin olarak al
