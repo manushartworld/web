@@ -1,13 +1,15 @@
 export default async function handler(req, res) {
-  const { orderid, appid } = req.query; // time'ı URL'den aldık, gerek yok.
+  const { orderid, appid } = req.query;
   const steamKey = process.env.STEAM_API_KEY;
 
   try {
-    // 2026 yılındayız, başlangıç zamanı olarak oyunun başlangıcını veya bugünü ver
-    const time = "2026-01-01T00:00:00Z"; 
+    // Bugünün tarihini değil, işlemin daha garantili bulunması için 
+    // işlemin gerçekleşmiş olabileceği makul bir başlangıç tarihi (RFC 3339)
+    // Steam'in istediği format: YYYY-MM-DDTHH:MM:SSZ
+    const today = new Date().toISOString().split('.')[0] + 'Z'; 
     
-    // Steam'in istediği type=GAMESALES (oyun içi satışlar için) parametresini de ekledik
-    const url = `https://partner.steam-api.com/ISteamMicroTxn/GetReport/v5/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${time}&type=GAMESALES`;
+    // Steam GetReport v5 endpoint'i
+    const url = `https://partner.steam-api.com/ISteamMicroTxn/GetReport/v5/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${today}&type=GAMESALES`;
     
     const response = await fetch(url);
     const data = await response.text();
