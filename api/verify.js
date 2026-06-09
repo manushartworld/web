@@ -11,7 +11,8 @@ export default async function handler(req, res) {
     
     // Steam'in istediği en temiz URL yapısı
     // URL'in tam olarak şu olduğundan emin ol:
-    const url = `https://api.steampowered.com/ISteamMicroTxn/GetReport/v0002/?key=${encodedKey}&appid=4686310&orderid=${orderid}&time=${time}`;
+    // Kodundaki URL kısmını tam olarak bu şekilde yap
+    const url = `https://partner.steamgames.com/ISteamMicroTxn/GetReport/v0002/?key=${encodedKey}&appid=4686310&orderid=${orderid}&time=${time}`;
     
     const response = await fetch(url);
     const data = await response.json();
