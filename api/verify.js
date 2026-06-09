@@ -1,10 +1,11 @@
 export default async function handler(req, res) {
-  const { orderid, appid, time } = req.query;
+  const { orderid, appid } = req.query; // Time'ı çıkardık
   const steamKey = process.env.STEAM_API_KEY;
 
   try {
-    // Steam'e Unity'den gelen 0 değerini gönderiyoruz
-    const url = `https://api.steampowered.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${time}`;
+    // Steam'in GetReport metodunu time olmadan zorluyoruz. 
+    // Bazı durumlarda "time" parametresi "GetReport" için opsiyoneldir.
+    const url = `https://api.steampowered.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=${appid}&orderid=${orderid}`;
     
     const response = await fetch(url);
     const data = await response.text();
