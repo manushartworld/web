@@ -5,20 +5,17 @@ export default async function handler(req, res) {
   if (!orderid) return res.status(400).json({ error: "orderid gerekli" });
 
   try {
-    // Şimdiki zamanı saniye cinsinden al (Unix Timestamp)
+    // encodeURIComponent ile anahtarı "temiz" hale getiriyoruz
+    const encodedKey = encodeURIComponent(steamKey);
     const time = Math.floor(Date.now() / 1000);
     
-    // URL'e &time=${time} parametresini ekledik
-    const url = `https://api.steampowered.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=4686310&orderid=${orderid}&time=${time}`;
+    // Steam'in istediği en temiz URL yapısı
+    const url = `https://partner.steamgames.com/ISteamMicroTxn/GetReport/v0002/?key=${encodedKey}&appid=4686310&orderid=${orderid}&time=${time}`;
     
     const response = await fetch(url);
-    const text = await response.text();
+    const data = await response.json();
     
-    if (!response.ok) {
-        throw new Error(`Steam API yanıt vermedi: ${text}`);
-    }
-
-    res.status(200).json(JSON.parse(text));
+    res.status(200).json(data);
   } catch (error) {
     res.status(500).json({ error: "DETAYLI HATA: " + error.message });
   }
