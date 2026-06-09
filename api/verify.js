@@ -1,11 +1,15 @@
 export default async function handler(req, res) {
-  const { orderid } = req.query;
+  // Artık Unity'den her şeyi alıyoruz
+  const { orderid, time, appid } = req.query;
   const steamKey = process.env.STEAM_API_KEY;
 
+  if (!orderid || !time || !appid) {
+    return res.status(400).json({ error: "Eksik parametre: orderid, time veya appid" });
+  }
+
   try {
-    // 1. ADIM: URL'den &time=${time} kısmını tamamen çıkardık.
-    // Eğer Steam hata verirse, aşağıda 2. adımda vereceğim düzeltmeyi yap.
-    const url = `https://api.steampowered.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=4686310&orderid=${orderid}`;
+    // Steam'e Unity'den gelen appid'yi iletiyoruz
+    const url = `https://api.steampowered.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${time}`;
     
     const response = await fetch(url);
     const data = await response.json(); 
