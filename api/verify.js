@@ -3,14 +3,12 @@ export default async function handler(req, res) {
   const steamKey = process.env.STEAM_API_KEY;
 
   try {
-    // time parametresini şimdiki zamanı alarak oluştur
-    const time = Math.floor(Date.now() / 1000);
-    
-    // Steam'in istediği formatta URL
-    const url = `https://api.steampowered.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=4686310&orderid=${orderid}&time=${time}`;
+    // 1. ADIM: URL'den &time=${time} kısmını tamamen çıkardık.
+    // Eğer Steam hata verirse, aşağıda 2. adımda vereceğim düzeltmeyi yap.
+    const url = `https://api.steampowered.com/ISteamMicroTxn/GetReport/v0002/?key=${steamKey}&appid=4686310&orderid=${orderid}`;
     
     const response = await fetch(url);
-    const data = await response.json(); // Artık JSON döneceğini biliyoruz
+    const data = await response.json(); 
 
     return res.status(200).json(data);
     
