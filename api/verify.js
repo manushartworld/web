@@ -3,11 +3,12 @@ export default async function handler(req, res) {
   const steamKey = process.env.STEAM_API_KEY;
 
   try {
-    // BUGÜNÜN DEĞİL, 24 SAAT ÖNCESİNİN TARİHİNİ ALIYORUZ
+    // 24 saat öncesinin tarihini al (Daha geniş bir arama için)
     const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('.')[0] + 'Z'; 
-    
-    // time parametresini 24 saat öncesine çektik
-    const url = `https://partner.steam-api.com/ISteamMicroTxn/GetReport/v5/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${yesterday}&type=GAMESALES`;
+
+    //const url = `https://partner.steam-api.com/ISteamMicroTxn/GetReport/v5/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${yesterday}&type=GAMESALES`;
+    // KESİN ÇÖZÜM: ISteamMicroTxnSandbox kullandık ve v5 sürümü ile birleştirdik
+    const url = `https://partner.steam-api.com/ISteamMicroTxnSandbox/GetReport/v5/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${yesterday}&type=GAMESALES`;
     
     const response = await fetch(url);
     const data = await response.text();
