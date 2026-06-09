@@ -4,7 +4,8 @@ export default async function handler(req, res) {
 
   try {
     // Sandbox domain'ini kullanıyoruz
-    const url = `https://partner.steam-api.com/ISteamMicroTxnSandbox/GetReport/v0002/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${time}`;
+    //const url = `https://partner.steam-api.com/ISteamMicroTxnSandbox/GetReport/v0002/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${time}`;
+    const url = `https://partner.steam-api.com/ISteamMicroTxnSandbox/GetReport/v5/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${time}`;
     
     const response = await fetch(url);
     const data = await response.text();
