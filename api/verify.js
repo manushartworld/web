@@ -1,15 +1,13 @@
 export default async function handler(req, res) {
-  // Unity'den gelen tüm parametreleri alıyoruz
+  // Unity'den ne gelirse onu al, JS tarafında ASLA hesaplama yapma
   const { orderid, appid, startTime, type } = req.query; 
   const steamKey = process.env.STEAM_API_KEY;
 
   try {
-    // Unity'den gelmezse varsayılan değerleri atıyoruz
-    const timeParam = startTime || new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().split('.')[0] + 'Z'; 
-    const transactionType = type || "GAMESALES"; 
-    
-    // Artık her şey modüler
-    const url = `https://partner.steam-api.com/ISteamMicroTxnSandbox/GetReport/v5/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${timeParam}&type=${transactionType}`;
+    // Sadece Unity'den gelenleri kullanıyoruz, varsayılan falan yok.
+    // Eğer parametre eksik gelirse Steam zaten hata döner, 
+    // biz de onu direkt kullanıcıya yansıtırız.
+    const url = `https://partner.steam-api.com/ISteamMicroTxnSandbox/GetReport/v5/?key=${steamKey}&appid=${appid}&orderid=${orderid}&time=${startTime}&type=${type}`;
     
     const response = await fetch(url);
     const data = await response.json();
