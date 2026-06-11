@@ -21,20 +21,17 @@ export default async function handler(req, res) {
     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzl5OjmX6xDyfuY_yQU8APS7KHObv7MTdmN8JzWu8Rxg3Zgy58EDpKNo9OcUMeryIjGGQ/exec';
 
   try {
-    const sheetResponse = await fetch(googleSheetUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        orderid: order.orderid, 
-        status: order.status, 
-        full: order 
-      })
-    });
-    
-    // Eğer Google'dan gelen cevap başarılı değilse loglara dök
-    if (!sheetResponse.ok) {
-       console.log("Sheet'e yazarken hata oldu, durum kodu:", sheetResponse.status);
-    }
+    const payload = { 
+  orderid: order.orderid, 
+  status: order.status, 
+  full: order 
+};
+
+await fetch(googleSheetUrl, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(payload)
+});
   } catch (err) {
     console.log("Sheet fetch hatası:", err);
   }
