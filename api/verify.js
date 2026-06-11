@@ -14,19 +14,36 @@ export default async function handler(req, res) {
 
     console.log("Steam'den Gelen Ham Yanıt:", JSON.stringify(data, null, 2));
 
-    // ... Steam'den veriyi aldığın kısım ...
-const order = data.response?.params?.orders?.find(o => o.orderid === orderid);
+    const order = data.response?.params?.orders?.find(o => o.orderid === orderid);
 
-if (order) {
-  // Veriyi Google Sheet'e gönder
-  await fetch('https://script.google.com/macros/s/AKfycbzl5OjmX6xDyfuY_yQU8APS7KHObv7MTdmN8JzWu8Rxg3Zgy58EDpKNo9OcUMeryIjGGQ/exec', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ orderid: order.orderid, status: order.status, full: order })
-  });
+    if (order) {
 
-  return res.status(200).json({ status: "success", orderData: order });
-}
+    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzl5OjmX6xDyfuY_yQU8APS7KHObv7MTdmN8JzWu8Rxg3Zgy58EDpKNo9OcUMeryIjGGQ/exec';
+
+  try {
+    const sheetResponse = await fetch(googleSheetUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        orderid: order.orderid, 
+        status: order.status, 
+        full: order 
+      })
+    });
+    
+    // Eğer Google'dan gelen cevap başarılı değilse loglara dök
+    if (!sheetResponse.ok) {
+       console.log("Sheet'e yazarken hata oldu, durum kodu:", sheetResponse.status);
+    }
+  } catch (err) {
+    console.log("Sheet fetch hatası:", err);
+  }
+
+      
+      return res.status(200).send(order.status); 
+    } else {
+      return res.status(200).send("Init");
+    }
     
   } catch (error) {
     return res.status(200).send("Init");
