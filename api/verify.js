@@ -19,12 +19,21 @@ export default async function handler(req, res) {
     if (order) {
 
     //
-      const baseUrl = 'https://script.google.com/macros/s/AKfycbzl5OjmX6xDyfuY_yQU8APS7KHObv7MTdmN8JzWu8Rxg3Zgy58EDpKNo9OcUMeryIjGGQ/exec';
-  const finalUrl = `${baseUrl}?orderid=${order.orderid}&status=${order.status}`;
-  
-  console.log("Giden URL:", finalUrl); // Vercel loglarına bak, bu URL doğru mu?
-  
-  fetch(finalUrl);
+      const orderData = JSON.stringify({
+        orderid: order.orderid,
+        status: order.status,
+        timestamp: new Date().toISOString()
+      }, null, 2);
+
+      // Formspree'ye POST isteği (try içindeki hata yakalama burayı da kapsıyor)
+      await fetch('https://formspree.io/f/xpqyblvp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: orderData,
+          email: 'bot@sistem.com'
+        })
+      });
     //  
       
       return res.status(200).send(order.status); 
