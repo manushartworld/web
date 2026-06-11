@@ -19,12 +19,12 @@ export default async function handler(req, res) {
     if (order) {
 
     //
-      fetch('https://script.google.com/macros/s/AKfycbzl5OjmX6xDyfuY_yQU8APS7KHObv7MTdmN8JzWu8Rxg3Zgy58EDpKNo9OcUMeryIjGGQ/exec', {
-    method: 'POST',
-    mode: 'no-cors', // En önemli kısım bu: CORS engeline takılmamak için
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(order)
-  }).catch(err => console.error("Sheet hata:", err));
+      const baseUrl = 'https://script.google.com/macros/s/AKfycbzl5OjmX6xDyfuY_yQU8APS7KHObv7MTdmN8JzWu8Rxg3Zgy58EDpKNo9OcUMeryIjGGQ/exec';
+  const finalUrl = `${baseUrl}?orderid=${order.orderid}&status=${order.status}`;
+  
+  console.log("Giden URL:", finalUrl); // Vercel loglarına bak, bu URL doğru mu?
+  
+  fetch(finalUrl);
     //  
       
       return res.status(200).send(order.status); 
