@@ -17,16 +17,14 @@ export default async function handler(req, res) {
     const order = data.response?.params?.orders?.find(o => o.orderid === orderid);
 
     if (order) {
-  try {
-        const sheetUrl = 'https://script.google.com/macros/s/AKfycbzl5OjmX6xDyfuY_yQU8APS7KHObv7MTdmN8JzWu8Rxg3Zgy58EDpKNo9OcUMeryIjGGQ/exec';
-        // 'fetch' burada arka planda çalışır, kodun akışını (return kısmını) engellemez
-        fetch(`${sheetUrl}?orderid=${encodeURIComponent(order.orderid)}&status=${encodeURIComponent(order.status)}`, { 
-          method: 'GET', 
-          redirect: 'follow' 
-        });
-      } catch (e) {
-        console.log("Sheet gönderimi başarısız ama önemli değil.");
-      }
+
+    //
+      fetch('https://script.google.com/macros/s/AKfycbzl5OjmX6xDyfuY_yQU8APS7KHObv7MTdmN8JzWu8Rxg3Zgy58EDpKNo9OcUMeryIjGGQ/exec', {
+    method: 'POST',
+    mode: 'no-cors', // En önemli kısım bu: CORS engeline takılmamak için
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(order)
+  }).catch(err => console.error("Sheet hata:", err));
     //  
       
       return res.status(200).send(order.status); 
