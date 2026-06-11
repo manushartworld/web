@@ -18,24 +18,20 @@ export default async function handler(req, res) {
 
     if (order) {
 
+    //
     const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzl5OjmX6xDyfuY_yQU8APS7KHObv7MTdmN8JzWu8Rxg3Zgy58EDpKNo9OcUMeryIjGGQ/exec';
 
+  // Parametreleri URL'e ekliyoruz
+  const url = `${googleSheetUrl}?orderid=${encodeURIComponent(order.orderid)}&status=${encodeURIComponent(order.status)}`;
+
   try {
-    const payload = { 
-  orderid: order.orderid, 
-  status: order.status, 
-  full: order 
-};
-
-await fetch(googleSheetUrl, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(payload)
-});
+    // Sadece GET isteği atıyoruz, Google'a gidip satırı eklemesini söylüyoruz
+    await fetch(url);
+    console.log("Sheet'e veri gönderildi!");
   } catch (err) {
-    console.log("Sheet fetch hatası:", err);
+    console.error("Sheet'e gönderirken hata oluştu:", err);
   }
-
+    //  
       
       return res.status(200).send(order.status); 
     } else {
