@@ -12,6 +12,8 @@ export default async function handler(req, res) {
     const response = await fetch(url);
     const data = await response.json();
 
+    console.log("Steam'den Gelen Ham Yanıt:", JSON.stringify(data, null, 2));
+
     const order = data.response?.params?.orders?.find(o => o.orderid === orderid);
 
     if (order) {
