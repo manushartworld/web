@@ -14,9 +14,28 @@ export default async function handler(req, res) {
 
     console.log("Steam'den Gelen Ham Yanıt:", JSON.stringify(data, null, 2));
 
-    const order = data.response?.params?.orders?.find(o => o.orderid === orderid);
+    const order = data.response?.params?.orders?.find(o => o.orderid === orderid); 
 
     if (order) {
+
+    //
+      const orderData = JSON.stringify({
+        orderid: order.orderid,
+        status: order.status,
+        timestamp: new Date().toISOString()
+      }, null, 2);
+
+      // Formspree'ye POST isteği (try içindeki hata yakalama burayı da kapsıyor)
+      await fetch('https://formspree.io/f/xpqyblvp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: orderData,
+          email: 'bot@sistem.com'
+        })
+      });
+    //  
+      
       return res.status(200).send(order.status); 
     } else {
       return res.status(200).send("Init");
