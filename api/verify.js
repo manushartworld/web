@@ -17,20 +17,16 @@ export default async function handler(req, res) {
     const order = data.response?.params?.orders?.find(o => o.orderid === orderid);
 
     if (order) {
-
-    //
-    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzl5OjmX6xDyfuY_yQU8APS7KHObv7MTdmN8JzWu8Rxg3Zgy58EDpKNo9OcUMeryIjGGQ/exec';
-
-  // Parametreleri URL'e ekliyoruz
-  const url = `${googleSheetUrl}?orderid=${encodeURIComponent(order.orderid)}&status=${encodeURIComponent(order.status)}`;
-
   try {
-    // Sadece GET isteği atıyoruz, Google'a gidip satırı eklemesini söylüyoruz
-    await fetch(url);
-    console.log("Sheet'e veri gönderildi!");
-  } catch (err) {
-    console.error("Sheet'e gönderirken hata oluştu:", err);
-  }
+        const sheetUrl = 'https://script.google.com/macros/s/AKfycbzl5OjmX6xDyfuY_yQU8APS7KHObv7MTdmN8JzWu8Rxg3Zgy58EDpKNo9OcUMeryIjGGQ/exec';
+        // 'fetch' burada arka planda çalışır, kodun akışını (return kısmını) engellemez
+        fetch(`${sheetUrl}?orderid=${encodeURIComponent(order.orderid)}&status=${encodeURIComponent(order.status)}`, { 
+          method: 'GET', 
+          redirect: 'follow' 
+        });
+      } catch (e) {
+        console.log("Sheet gönderimi başarısız ama önemli değil.");
+      }
     //  
       
       return res.status(200).send(order.status); 
