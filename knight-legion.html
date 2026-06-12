@@ -3,46 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knight Legion | Download</title>
+    <title>Download | Knight Legion</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-    
     <style>
-        :root { --primary: #00d4ff; --bg: #0a0a0a; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #fff; margin: 0; padding: 50px 20px; text-align: center; }
+        body { background: #0a0a0a; color: white; font-family: sans-serif; text-align: center; padding-top: 50px; }
+        .dl-container { display: flex; flex-direction: column; align-items: center; gap: 20px; }
         
-        .container { max-width: 600px; margin: 0 auto; }
-        h1 { font-family: 'Orbitron', sans-serif; color: var(--primary); margin-bottom: 40px; text-transform: uppercase; letter-spacing: 2px; }
-        
-        .download-btn { 
-            display: flex; align-items: center; justify-content: center; gap: 15px;
-            background: #111; border: 1px solid #333; color: #fff; padding: 20px;
-            margin-bottom: 15px; border-radius: 12px; text-decoration: none;
-            font-family: 'Orbitron', sans-serif; font-weight: 700; transition: 0.3s;
-        }
-        .download-btn:hover { border-color: var(--primary); color: var(--primary); background: #1a1a1a; }
-        .download-btn i { font-size: 1.5rem; }
+        /* Başlık stili */
+        .header-text { font-size: 2.5rem; margin-bottom: 40px; color: #00d4ff; text-transform: uppercase; }
 
-        .back-link { display: inline-block; margin-top: 40px; color: #555; text-decoration: none; font-size: 0.8rem; }
+        /* Buton stili */
+        .store-btn {
+            display: flex; align-items: center; justify-content: start;
+            width: 300px; padding: 15px 25px; border-radius: 12px;
+            background: #1a1a1a; color: white; text-decoration: none;
+            border: 1px solid #333; transition: 0.3s;
+        }
+        .store-btn:hover { background: #00d4ff; color: #000; border-color: #00d4ff; }
+        
+        /* İkonların görünümü */
+        .icon { font-size: 1.8rem; margin-right: 20px; width: 30px; text-align: center; }
+        .text { font-weight: bold; font-family: 'Orbitron', sans-serif; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1 id="title-text">DOWNLOAD NOW</h1>
+    <h1 class="header-text">DOWNLOAD NOW</h1>
 
-        <a href="https://play.google.com/store/apps/details?id=com.manushart.knightlegion" class="download-btn">
-            <i class="fab fa-google-play"></i> GOOGLE PLAY
-        </a>
-        <a href="https://apps.apple.com/us/app/knight-legion-rpg-strategy/id6760857277" class="download-btn">
-            <i class="fab fa-apple"></i> APP STORE
-        </a>
-        <a href="https://store.steampowered.com/app/4686310/Knight_Legion_Rpg_Strategy" class="download-btn">
-            <i class="fab fa-steam"></i> STEAM
+    <div class="dl-container">
+        <a href="https://play.google.com/store/apps/details?id=com.manushart.knightlegion" class="store-btn">
+            <span class="icon"><i class="fab fa-google-play"></i></span>
+            <span class="text">Google Play</span>
         </a>
 
-        <br>
-        <a href="index.html" class="back-link">← BACK TO STUDIO HOME</a>
+        <a href="https://apps.apple.com/us/app/knight-legion-rpg-strategy/id6760857277" class="store-btn">
+            <span class="icon"><i class="fab fa-app-store-ios"></i></span>
+            <span class="text">App Store</span>
+        </a>
+
+        <a href="https://store.steampowered.com/app/4686310/Knight_Legion_Rpg_Strategy" class="store-btn">
+            <span class="icon"><i class="fab fa-steam"></i></span>
+            <span class="text">Steam</span>
+        </a>
     </div>
 
 </body>
