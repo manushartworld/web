@@ -21,88 +21,35 @@
             overflow-x: hidden;
         }
 
-        /* DİL SEÇİCİ STİLİ (Ana sayfayla aynı) */
-        .lang-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            display: flex;
-            gap: 10px;
-        }
+        .lang-switcher { position: fixed; top: 20px; right: 20px; z-index: 100; display: flex; gap: 10px; }
+        .lang-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid #333; color: #fff; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; transition: 0.3s; }
+        .lang-btn.active { border-color: var(--primary); color: var(--primary); background: rgba(0, 212, 255, 0.1); }
 
-        .lang-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid #333;
-            color: #fff;
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-            transition: 0.3s;
-        }
+        .glow { position: absolute; width: 450px; height: 450px; background: #0a2d3a; filter: blur(150px); opacity: 0.1; z-index: -1; top: 20%; left: 50%; transform: translateX(-50%); }
 
-        .lang-btn.active {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: rgba(0, 212, 255, 0.1);
-        }
-
-        .glow { 
-            position: absolute; width: 450px; height: 450px; background: #0a2d3a; 
-            filter: blur(150px); opacity: 0.1; z-index: -1; top: 20%; left: 50%; transform: translateX(-50%); 
-        }
-
-        .container { max-width: 1200px; margin: 0 auto; }
-
-        .game-logo { 
-            width: 320px; max-width: 80%; margin-bottom: 25px; 
-            filter: drop-shadow(0 0 15px rgba(0,212,255,0.25)); transition: 0.3s ease;
-        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .game-logo { width: 320px; max-width: 80%; margin-bottom: 25px; filter: drop-shadow(0 0 15px rgba(0,212,255,0.25)); }
         
-        h1 { 
-            font-family: 'Orbitron', sans-serif; font-size: 3rem; letter-spacing: 5px; 
-            color: #fff; margin-bottom: 10px; text-transform: uppercase;
-        }
-        
-        .tagline { 
-            color: var(--primary); font-family: 'Orbitron', sans-serif; font-size: 1rem; 
-            letter-spacing: 6px; margin-bottom: 60px; text-transform: uppercase; font-weight: 500;
-        }
+        h1 { font-family: 'Orbitron', sans-serif; font-size: 3rem; letter-spacing: 5px; color: #fff; margin-bottom: 10px; text-transform: uppercase; }
+        .tagline { color: var(--primary); font-family: 'Orbitron', sans-serif; font-size: 1rem; letter-spacing: 6px; margin-bottom: 60px; text-transform: uppercase; font-weight: 500; }
 
-        .video-grid { 
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; 
+        /* İndirme Butonları */
+        .download-grid { display: grid; gap: 20px; margin-bottom: 80px; }
+        .dl-btn { 
+            display: block; background: #1a1a1a; border: 1px solid #333; color: #fff; 
+            padding: 20px; border-radius: 14px; text-decoration: none; 
+            font-family: 'Orbitron', sans-serif; font-weight: 800; transition: 0.3s;
         }
+        .dl-btn:hover { background: var(--primary); color: #000; border-color: var(--primary); }
 
-        .video-card { 
-            background: var(--card); border-radius: 18px; overflow: hidden; border: 1px solid #1a1a1a; 
-            transition: 0.3s ease; backdrop-filter: blur(5px);
-        }
-
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
-        .back-link-container { margin-top: 80px; }
-        .back-btn { 
-            font-family: 'Orbitron', sans-serif; padding: 18px 45px; border-radius: 14px; 
-            text-decoration: none; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px;
-            transition: 0.3s ease; border: 2px solid #222; color: #555; display: inline-block;
-        }
+        .back-btn { font-family: 'Orbitron', sans-serif; padding: 18px 45px; border-radius: 14px; text-decoration: none; font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; transition: 0.3s ease; border: 2px solid #222; color: #555; display: inline-block; }
         .back-btn:hover { border-color: #444; color: #fff; }
 
-        .footer { 
-            margin-top: 100px; color: #222; font-size: 0.7rem; letter-spacing: 3px; 
-            font-family: 'Orbitron', sans-serif; text-transform: uppercase;
-        }
+        .footer { margin-top: 100px; color: #222; font-size: 0.7rem; letter-spacing: 3px; font-family: 'Orbitron', sans-serif; text-transform: uppercase; }
 
         @media (max-width: 768px) {
-            body { padding: 40px 15px; }
-            h1 { font-size: 1.8rem; letter-spacing: 3px; }
-            .tagline { font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 40px; }
-            .video-grid { grid-template-columns: 1fr; }
-            .back-btn { padding: 15px 30px; width: 80%; font-size: 0.75rem; }
-            .footer { font-size: 0.55rem; letter-spacing: 1px; }
+            h1 { font-size: 1.8rem; }
+            .dl-btn { padding: 15px; }
         }
     </style>
 </head>
@@ -118,28 +65,16 @@
         <img src="knightlegion.png" alt="Knight Legion Logo" class="game-logo">
         
         <h1 id="text-title">KNIGHT LEGION</h1>
-        <p class="tagline" id="text-tagline">RPG STRATEGY // TRAILERS & SNEAK PEEKS</p>
+        <p class="tagline" id="text-tagline">DOWNLOAD NOW</p>
 
-        <div class="video-grid">
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/PsKXxhOrbqc?si=iM5pmbOSEEaBu9JM" allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/7jbSgxGy6WA" allowfullscreen></iframe>
-                </div>
-            </div>
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/m7azbngqV6M" allowfullscreen></iframe>
-                </div>
-            </div>
+        <div class="download-grid">
+            <a href="https://play.google.com/store/apps/details?id=com.manushart.knightlegion" class="dl-btn" target="_blank">GOOGLE PLAY</a>
+            <a href="https://apps.apple.com/us/app/knight-legion-rpg-strategy/id6760857277" class="dl-btn" target="_blank">APP STORE</a>
+            <a href="https://store.steampowered.com/app/4686310/Knight_Legion_Rpg_Strategy" class="dl-btn" target="_blank">STEAM</a>
         </div>
 
         <div class="back-link-container">
-            <a href="index.html" class="back-btn" id="text-back">← BACK TO STUDIO HOME</a>
+            <a href="index.html" class="back-btn" id="text-back">← BACK TO HOME</a>
         </div>
 
         <div class="footer" id="text-footer">
@@ -150,16 +85,16 @@
     <script>
         const translations = {
             en: {
-                title: "KNIGHT LEGION: RPG STRATEGY",
-                tagline: "TRAILERS & SNEAK PEEKS",
-                back: "← BACK TO STUDIO HOME",
-                footer: "EST. 2026 / MANUSHART"
+                title: "KNIGHT LEGION",
+                tagline: "DOWNLOAD NOW",
+                back: "← BACK TO HOME",
+                footer: "© 2026 MANUSHART // KNIGHT LEGION PROJECT // EST. NETHERLANDS"
             },
             tr: {
-                title: "KNIGHT LEGION: RPG STRATEGY",
-                tagline: "FRAGMANLAR VE ÖNİZLEMELER",
-                back: "← STÜDYO ANA SAYFASINA DÖN",
-                footer: "EST. 2026 / MANUSHART"
+                title: "KNIGHT LEGION",
+                tagline: "HEMEN İNDİR",
+                back: "← ANA SAYFAYA DÖN",
+                footer: "© 2026 MANUSHART // KNIGHT LEGION PROJECT // EST. NETHERLANDS"
             }
         };
 
@@ -169,26 +104,14 @@
             document.getElementById('text-back').innerText = translations[lang].back;
             document.getElementById('text-footer').innerText = translations[lang].footer;
 
-            // Butonları güncelle
             document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
-
-            // Seçimi kaydet (Hafızada tut)
             localStorage.setItem('preferredLang', lang);
         }
 
         window.onload = function() {
-            // Önce hafızadaki dile bak
-            const savedLang = localStorage.getItem('preferredLang');
-            
-            if (savedLang) {
-                setLanguage(savedLang);
-            } else {
-                // Hafıza boşsa (ilk kez giriyorsa) tarayıcı diline veya IP'ye bakılabilir
-                // Şimdilik ana sayfada yaptığımız gibi IP kontrolü de eklenebilir ama 
-                // ana sayfadan gelen biri zaten dili seçmiş olacaktır.
-                setLanguage('en'); 
-            }
+            const savedLang = localStorage.getItem('preferredLang') || 'en';
+            setLanguage(savedLang);
         };
     </script>
 </body>
