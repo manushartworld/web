@@ -163,3 +163,4 @@ pubmatic.com, 165438, RESELLER, 5d62403b186f2ace
 pubnative.net, 1009966, RESELLER, d641df8625486a7b
 triplelift.com, 14127, RESELLER, 6c33edb13117fd86
 pubmatic.com, 163117, RESELLER, 5d62403b186f2ace
+facebook.com, 429429214137539, DIRECT, c3e20eee3f780d68
